@@ -1,8 +1,8 @@
 const addresses = {
   "56": {
-    labubuNFT: "",
-    multiCall: "",
-    multiSign01: "",
+    labubuNFT: "0xd96db14e54E9aFb07063344140198E2F549f186B",
+    multiCall: "0xe981CF0D65Df9C37FB233eF33547a045df18E3f7",
+    multiSign01: "0xB70689CB3Dd1B77E78Dd3f6AbdF4cD83e8D9dF4A",
     usdc: '0x8ac76a51cc950d9822d68b83fe1ad97b32cd580d',
     usdt: "0x55d398326f99059ff775485246999027b3197955",
   },
