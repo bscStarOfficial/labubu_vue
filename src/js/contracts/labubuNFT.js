@@ -3,6 +3,7 @@ import {getAddress} from "@/js/config";
 import {getContract, getSelectedAddress, getSendPram} from "@/js/web3";
 import {Interface} from "ethers";
 import {postMessage} from "@/js/transaction";
+import BigNumber from "bignumber.js";
 
 export async function getDefaultContract() {
   let defaultAddress = await getAddress('labubuNFT');
@@ -35,9 +36,11 @@ export async function labubuNFTFuncEncode(func, args = []) {
 export function labubuNFTFuncDecode(func, result) {
   let imp = new Interface(defaultAbi);
   let res = imp.decodeFunctionResult(func, result);
-  if (func === 'pendingProfit' || func === 'nftPrice' || func === 'fistTokenId') {
+  if (func === 'pendingProfit' || func === 'nftPrice') {
     return new BigNumber(res[0]).dividedBy(1e18).toFixed(4)
-  } else if (func === 'payees') {
+  } else if (func === 'fistTokenId') {
+    return new BigNumber(res[0]).toNumber()
+  }else if (func === 'payees') {
     return {
       released: new BigNumber(res[0]).dividedBy(1e18).toFixed(),
       available: new BigNumber(res[1]).dividedBy(1e18).toFixed(),

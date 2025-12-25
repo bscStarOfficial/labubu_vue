@@ -1,6 +1,6 @@
 import defaultAbi from '@/abis/multiCall';
 import {getAddress} from "@/js/config";
-import {getContract, getSelectedAddress} from "@/js/web3";
+import {getContract, getSelectedAddress, getSendPram} from "@/js/web3";
 import {labubuNFTFuncEncode} from "@/js/contracts/labubuNFT";
 
 export async function getDefaultContract() {
@@ -9,12 +9,12 @@ export async function getDefaultContract() {
 }
 
 export async function aggregate(calls) {
+  console.log({calls});
   let contract = await getDefaultContract();
   if (window?.ethereum?.platform == 'btn') {
     return await contract.aggregate(calls);
   } else {
-    const sendParam = {from: window.ethereum?.selectedAddress};
-    return await contract?.methods?.aggregate(calls).call(sendParam);
+    return await contract?.methods?.aggregate(calls).call(getSendPram());
   }
 }
 

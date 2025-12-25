@@ -5,17 +5,14 @@ import {onMounted, ref} from "vue";
 import {showDialog} from "vant";
 import {getNFTImage} from "@/js/config";
 import {useLabubuNFTStore} from "@/stores/labubuNFT";
-import {getSelectedAddress} from "../../js/web3";
-import {replaceMiddleWithAsterisks} from "../../js/utils";
+import {getSelectedAddress} from "@/js/web3";
+import {replaceMiddleWithAsterisks} from "@/js/utils";
 import {claim} from "@/js/contracts/labubuNFT";
 
-// 当前NFT信息
-const currentNFT = ref({
-  id: '#0893',
-  price: 2.5,
-  pendingDividends: 0.856,
-  receivedDividends: 3.214
-});
+const store = useLabubuNFTStore();
+onMounted(async () => {
+  await store.setState([0, 1, 2, 3]);
+})
 
 // NFT合集列表
 const nftList = ref([
@@ -51,10 +48,6 @@ const claimEarnings = async () => {
   claiming.value = false;
 };
 
-const store = useLabubuNFTStore();
-onMounted(async () => {
-  await store.setState([0, 1, 2]);
-})
 
 </script>
 <template>
@@ -94,11 +87,11 @@ onMounted(async () => {
             <div class="info-grid">
               <div class="info-item">
                 <div class="info-label">NFT编号</div>
-                <div class="info-value">{{ store.fistTokenId }}</div>
+                <div class="info-value">{{ store.fistTokenId === 999999 ? "未获取": store.fistTokenId }}</div>
               </div>
               <div class="info-item">
                 <div class="info-label">NFT价格</div>
-                <div class="info-value price"> {{ store.nftPrice }} BNB</div>
+                <div class="info-value price"> {{ Number(store.nftPrice) }} BNB</div>
               </div>
               <div class="info-item">
                 <div class="info-label">待分红金额</div>

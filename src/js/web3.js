@@ -31,8 +31,7 @@ async function windowEthereum() {
 }
 
 export function getSelectedAddress() {
-  return '0xF34DCceeac11751E996D1622b569d2D4940D64e6';
-  // return window.ethereum?.selectedAddress;
+  return window.ethereum?.selectedAddress;
 }
 
 export function newBN(str) {
@@ -58,7 +57,7 @@ export async function getContract(abi, address) {
   }
 }
 
-export async function getSendPram() {
+export function getSendPram() {
   return {
     from: getSelectedAddress(),
   }
