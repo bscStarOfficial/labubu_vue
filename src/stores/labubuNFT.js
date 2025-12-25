@@ -5,7 +5,7 @@ import {balanceOfDecode} from "@/js/contracts/erc20s";
 import {stakingFuncDecode} from "@/js/contracts/staking";
 import {labubuNFTFuncDecode} from "@/js/contracts/labubuNFT";
 
-export const useStakingStore = defineStore('staking', {
+export const useLabubuNFTStore = defineStore('labubuNFT', {
   // 为了完整类型推理，推荐使用箭头函数
   state: () => ({
     nftPrice: 0,

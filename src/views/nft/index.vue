@@ -4,8 +4,9 @@
 import {onMounted, ref} from "vue";
 import {showDialog} from "vant";
 import {getNFTImage} from "@/js/config";
-
-const walletAddress = ref('0x7a3f5...8b9c1');
+import {useLabubuNFTStore} from "@/stores/labubuNFT";
+import {getSelectedAddress} from "../../js/web3";
+import {replaceMiddleWithAsterisks} from "../../js/utils";
 
 // 当前NFT信息
 const currentNFT = ref({
@@ -54,11 +55,10 @@ const claimEarnings = () => {
   }, 1000);
 };
 
-// 模拟加载数据
-onMounted(() => {
-  // 这里可以添加API调用
-  console.log('暗色科技风NFT平台已加载');
-});
+const store = useLabubuNFTStore();
+onMounted(async () => {
+  await store.setState([0, 1, 2]);
+})
 
 </script>
 <template>
@@ -84,7 +84,7 @@ onMounted(() => {
               </div>
               <!--              <span>SKY LAB</span>-->
             </div>
-            <div class="wallet-address">{{ walletAddress }}</div>
+            <div class="wallet-address">{{ replaceMiddleWithAsterisks(getSelectedAddress()) }}</div>
           </div>
           <div class="title-container">
             <h1 class="title">SKY LABUBU</h1>
@@ -102,15 +102,15 @@ onMounted(() => {
               </div>
               <div class="info-item">
                 <div class="info-label">NFT价格</div>
-                <div class="info-value price"> 0.6 BNB</div>
+                <div class="info-value price"> {{ store.nftPrice }} BNB</div>
               </div>
               <div class="info-item">
                 <div class="info-label">待分红金额</div>
-                <div class="info-value pending">0</div>
+                <div class="info-value pending">{{ store.availableReward }}</div>
               </div>
               <div class="info-item">
                 <div class="info-label">已分红金额</div>
-                <div class="info-value received">0</div>
+                <div class="info-value received">{{ store.payee.released }}</div>
               </div>
             </div>
             <van-button
