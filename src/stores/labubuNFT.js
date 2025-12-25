@@ -8,7 +8,7 @@ export const useLabubuNFTStore = defineStore('labubuNFT', {
   state: () => ({
     nftPrice: 0,
     pendingProfit: 0,
-    fistTokenId: 9999999,
+    fistTokenId: "-",
     payee: {
       released: 0,
       available: 0
