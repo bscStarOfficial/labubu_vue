@@ -35,3 +35,8 @@ export function replaceMiddleWithAsterisks(inputString) {
   return firstFiveCharacters + "****" + lastFiveCharacters
 }
 
+export function replaceMiddleWithAsterisks2(inputString) {
+  if (inputString == "") return ""
+  const lastFiveCharacters = inputString.substring(inputString.length - 5);
+  return "****" + lastFiveCharacters
+}
