@@ -1,13 +1,14 @@
 <script setup>
 import {onMounted, reactive, ref} from 'vue';
 import {useMultiSignStore} from "@/stores/mutiSign01";
-import {submitTransaction, discardTransaction, confirmTransaction, executeTransaction, isOwner} from "@/js/contracts/multiSign";
+import {submitTransaction, discardTransaction, confirmTransaction, executeTransaction} from "@/js/contracts/multiSign";
 import {replaceMiddleWithAsterisks2} from "@/js/utils"
+import {getSelectedAddress} from "@/js/web3";
 
 const multiSigStore = useMultiSignStore();
 const self = ref("")
 onMounted(async () => {
-  self.value = window.ethereum?.selectedAddress.toLowerCase();
+  self.value = getSelectedAddress().toLowerCase();
   await multiSigStore.setState()
 })
 const loading = ref(false);
@@ -33,16 +34,16 @@ async function doSubmitTransaction() {
   try {
     let destinationName, type;
     if (proposalType.value == 'addOwner' || proposalType.value == 'removeOwner') {
-      destinationName = 'multiSign';
+      destinationName = 'multiSign01';
       type = proposalType.value;
-    } else if (proposalType.value == 'btn' || proposalType.value == 'usdt' || proposalType.value == 'btnBnb') {
+    } else if (proposalType.value == 'usdc' || proposalType.value == 'usdt') {
       destinationName = proposalType.value;
       type = 'transfer';
     } else if (proposalType.value == 'bnb') {
       destinationName = '';
       type = 'send';
     }
-    await submitTransaction('multiSign', destinationName, type, address.value, amount.value);
+    await submitTransaction('multiSign01', destinationName, type, address.value, amount.value);
   } catch (e) {
     console.log(e)
   }
@@ -57,7 +58,7 @@ async function doDiscardTransaction(id) {
   if (loading2.value) return;
   loading2.value = true;
   try {
-    await discardTransaction('multiSign', id);
+    await discardTransaction('multiSign01', id);
   } catch (e) {
     console.log(e)
   }
@@ -69,7 +70,7 @@ async function doConfirmTransaction(id) {
   if (loading2.value) return;
   loading2.value = true;
   try {
-    await confirmTransaction('multiSign', id);
+    await confirmTransaction('multiSign01', id);
   } catch (e) {
     console.log(e)
   }
@@ -81,7 +82,7 @@ async function doExecuteTransaction(id) {
   if (loading2.value) return;
   loading2.value = true;
   try {
-    await executeTransaction('multiSign', id);
+    await executeTransaction('multiSign01', id);
   } catch (e) {
     console.log(e)
   }
@@ -91,37 +92,31 @@ async function doExecuteTransaction(id) {
 
 </script>
 <template>
-  <div class="multiSign" v-if="multiSigStore.isOwner || self == '0xe46115B3cFd15eEF5BdDF88480EC2F095E5CE57d'.toLowerCase()">
-    <van-nav-bar class="Navbar" title="BTN 多签" :border="false"/>
+  <!--  <div class="multiSign" v-if="multiSigStore.isOwner || self == '0xe46115B3cFd15eEF5BdDF88480EC2F095E5CE57d'.toLowerCase()">-->
+  <div class="multiSign">
+    <van-nav-bar class="Navbar" title="LABUBU 多签" :border="false"/>
     <div class="content">
       <div class="balance">
         <div class="tip-l">
-          <img src="../../assets/tokens/btn.png" alt="">
-          <div>BTN余额</div>
-        </div>
-        <div class="tip-r">{{ multiSigStore.btnBalance }}</div>
-      </div>
-      <div class="balance">
-        <div class="tip-l">
-          <img src="../../assets/tokens/usdt.png" alt="">
+          <img src="@/assets/tokens/usdt.png" alt="">
           <div>USDT余额</div>
         </div>
         <div class="tip-r">{{ multiSigStore.usdtBalance }}</div>
       </div>
       <div class="balance">
         <div class="tip-l">
-          <img src="../../assets/tokens/bnb.png" alt="">
+          <img src="@/assets/tokens/usdc.png" alt="">
+          <div>USDC余额</div>
+        </div>
+        <div class="tip-r">{{ multiSigStore.usdcBalance }}</div>
+      </div>
+      <div class="balance">
+        <div class="tip-l">
+          <img src="@/assets/tokens/bnb.png" alt="">
           <div>BNB余额</div>
         </div>
         <div class="tip-r">{{ multiSigStore.bnbBalance }}</div>
       </div>
-<!--      <div class="balance">-->
-<!--        <div class="tip-l">-->
-<!--          <img src="../../assets/tokens/btn.png" alt="">-->
-<!--          <div>LP余额</div>-->
-<!--        </div>-->
-<!--        <div class="tip-r">{{ multiSigStore.lpBalance }}</div>-->
-<!--      </div>-->
 
       <div class="operate-title">操作记录</div>
       <div class="table">
@@ -154,11 +149,11 @@ async function doExecuteTransaction(id) {
       </div>
       <div class="bottom">
         <div class="btn" @click="showProposal('usdt')">USDT提案</div>
-        <div class="btn" @click="showProposal('btn')">BTN提案</div>
+        <div class="btn" @click="showProposal('usdc')">USDC提案</div>
         <div class="btn" @click="showProposal('bnb')">BNB提案</div>
       </div>
       <div class="bottom" style="margin-top: 10px;">
-<!--        <div class="btn" @click="showProposal('btnBnb')">LP提案</div>-->
+        <!--        <div class="btn" @click="showProposal('btnBnb')">LP提案</div>-->
         <div class="btn" @click="showProposal('addOwner')">加员提案</div>
         <div class="btn" @click="showProposal('removeOwner')">减员提案</div>
       </div>
@@ -167,14 +162,14 @@ async function doExecuteTransaction(id) {
           <div v-if="proposalType == 'btn'">btn转账</div>
           <div v-if="proposalType == 'bnb'">bnb转账</div>
           <div v-if="proposalType == 'usdt'">usdt转账</div>
-<!--          <div v-if="proposalType == 'btnBnb'">LP转账</div>-->
+          <!--          <div v-if="proposalType == 'btnBnb'">LP转账</div>-->
           <div v-if="proposalType == 'addOwner'">加员提案</div>
           <div v-if="proposalType == 'removeOwner'">裁员提案</div>
         </div>
         <div class="input">
           <van-field placeholder="请输入地址" v-model="address"/>
         </div>
-        <div class="input" v-if="proposalType == 'btn' || proposalType == 'usdt' || proposalType == 'bnb' || proposalType == 'btnBnb'">
+        <div class="input" v-if="proposalType == 'usdt' || proposalType == 'usdc' || proposalType == 'bnb'">
           <van-field placeholder="请输入转账数量" v-model="amount"/>
         </div>
         <div class='button' style="border-radius: 10px;" @click="doSubmitTransaction()">

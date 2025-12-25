@@ -8,6 +8,10 @@ const router = createRouter({
       path: "/",
       component: () => import("@/views/nft/index.vue"),
     },
+    {
+      path: "/mutiSign01",
+      component: () => import("@/views/admin/mutiSign01.vue"),
+    },
   ],
 });
 

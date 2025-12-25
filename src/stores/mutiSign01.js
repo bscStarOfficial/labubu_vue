@@ -4,7 +4,6 @@ import {balanceOfDecode, balanceOfEncode} from "@/js/contracts/erc20s";
 import {getAddress} from "@/js/config";
 import {formatNumber18} from "@/js/math";
 import {aggregate} from "@/js/contracts/multiCall";
-import {getBnbBalance} from "@/js/web3";
 
 export const useMultiSignStore = defineStore('multiSign01', {
   // 为了完整类型推理，推荐使用箭头函数
@@ -40,7 +39,6 @@ export const useMultiSignStore = defineStore('multiSign01', {
           this.transactions.push(transactions[i]);
         }
       }
-      this.bnbBalance = await getBnbBalance(address)
     },
   },
 })

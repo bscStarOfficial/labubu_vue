@@ -131,10 +131,9 @@ export function isOwnerDecode(result) {
 export async function decodeData(data, desc) {
   let res, imp;
   let transferHash = solidityPackedKeccak256(["string"], ["transfer"]);
-  let btnTransferHash = solidityPackedKeccak256(["string"], ["btn"]);
+  let usdcTransferHash = solidityPackedKeccak256(["string"], ["usdc"]);
   let usdtTransferHash = solidityPackedKeccak256(["string"], ["usdt"]);
   let bnbTransferHash = solidityPackedKeccak256(["string"], ['bnb']);
-  let btnBnbTransferHash = solidityPackedKeccak256(["string"], ["btnBnb"]);
   let addOwnerHash = solidityPackedKeccak256(["string"], ["addOwner"]);
   let removeOwnerHash = solidityPackedKeccak256(["string"], ["removeOwner"]);
 
@@ -145,12 +144,12 @@ export async function decodeData(data, desc) {
       address: res[0],
       amount: formatEther(res[1])
     };
-  } else if (desc == btnTransferHash) {
+  } else if (desc == usdcTransferHash) {
     imp = new Interface(erc20Abi);
     res = imp.decodeFunctionData("transfer", data);
     return {
       address: res[0],
-      amount: "BTN " + formatEther(res[1])
+      amount: "USDC " + formatEther(res[1])
     };
   } else if (desc == usdtTransferHash) {
     imp = new Interface(erc20Abi);
@@ -163,13 +162,6 @@ export async function decodeData(data, desc) {
     return {
       address: '',
       amount: "BNB "
-    };
-  } else if (desc == btnBnbTransferHash) {
-    imp = new Interface(erc20Abi);
-    res = imp.decodeFunctionData("transfer", data);
-    return {
-      address: res[0],
-      amount: "LP " + formatEther(res[1])
     };
   } else if (desc == addOwnerHash) {
     imp = new Interface(defaultAbi);
