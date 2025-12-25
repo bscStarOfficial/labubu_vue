@@ -1,5 +1,6 @@
 import Web3 from 'web3';
 import {Contract} from "ethers";
+import {getRpcProvider} from "@/js/rpc";
 
 export function getWeb3() {
   let code = window.ethereum ? 1 : (window.web3 ? 2 : 0)
