@@ -1,5 +1,5 @@
 import Web3 from 'web3';
-import {verifyTypedData} from "ethers";
+import {Contract} from "ethers";
 
 export function getWeb3() {
   let code = window.ethereum ? 1 : (window.web3 ? 2 : 0)
