@@ -1,0 +1,35 @@
+{
+  "name": "wallet-vue",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@number-flow/vue": "^0.4.8",
+    "amfe-flexible": "^2.2.1",
+    "axios": "^1.6.7",
+    "base64url": "^3.0.1",
+    "bignumber.js": "^9.1.2",
+    "ethers": "^6.4.0",
+    "jose": "^4.10.4",
+    "pinia": "^2.1.6",
+    "qrcode": "^1.5.3",
+    "vant": "^4.7.2",
+    "vue": "^3.3.4",
+    "vue-i18n": "^11.1.12",
+    "vue-router": "^4.0.13",
+    "vue3-clipboard": "^1.0.0",
+    "vue3-qr-reader": "^1.0.0",
+    "web3": "^1.7.0-rc.0"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^4.3.4",
+    "postcss": "^8.4.31",
+    "postcss-pxtorem": "^6.0.0",
+    "sass": "^1.85.1",
+    "vite": "^4.4.9"
+  }
+}

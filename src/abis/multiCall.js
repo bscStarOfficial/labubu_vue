@@ -1,0 +1,33 @@
+export default [
+  {
+    "inputs": [
+      {
+        "components": [
+          {
+            "internalType": "address",
+            "name": "target",
+            "type": "address"
+          },
+          {
+            "internalType": "bytes",
+            "name": "callData",
+            "type": "bytes"
+          }
+        ],
+        "internalType": "struct Multicall.Call[]",
+        "name": "calls",
+        "type": "tuple[]"
+      }
+    ],
+    "name": "aggregate",
+    "outputs": [
+      {
+        "internalType": "bytes[]",
+        "name": "returnData",
+        "type": "bytes[]"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  }
+]
