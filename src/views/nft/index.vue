@@ -7,6 +7,7 @@ import {getNFTImage} from "@/js/config";
 import {useLabubuNFTStore} from "@/stores/labubuNFT";
 import {getSelectedAddress} from "../../js/web3";
 import {replaceMiddleWithAsterisks} from "../../js/utils";
+import {claim} from "@/js/contracts/labubuNFT";
 
 // 当前NFT信息
 const currentNFT = ref({
@@ -34,25 +35,20 @@ const nftList = ref([
 const claiming = ref(false);
 
 // 获取收益
-const claimEarnings = () => {
+const claimEarnings = async () => {
   claiming.value = true;
 
-  // 模拟API请求
-  setTimeout(() => {
-    const earnings = currentNFT.value.pendingDividends;
-    currentNFT.value.receivedDividends += earnings;
-    currentNFT.value.pendingDividends = 0;
-
-    showDialog({
+  try {
+    await claim();
+    await showDialog({
       title: '收益领取成功',
       confirmButtonText: '确定',
       allowHtml: true
     });
-
-    claiming.value = false;
-
-
-  }, 1000);
+  } catch (error) {
+    console.log(error);
+  }
+  claiming.value = false;
 };
 
 const store = useLabubuNFTStore();
@@ -98,7 +94,7 @@ onMounted(async () => {
             <div class="info-grid">
               <div class="info-item">
                 <div class="info-label">NFT编号</div>
-                <div class="info-value">{{ currentNFT.id }}</div>
+                <div class="info-value">{{ store.fistTokenId }}</div>
               </div>
               <div class="info-item">
                 <div class="info-label">NFT价格</div>

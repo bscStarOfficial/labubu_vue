@@ -4,6 +4,7 @@ const addresses = {
   },
   "5611": {
     labubuNFT: '0x4057eB6A9416d782F01091F44942c0799c34C782',
+    multiCall: '0x4b33282ea726A0246D954B659949770eD36CC686',
   },
 }
 

@@ -1,12 +1,6 @@
 import defaultAbi from '@/abis/multiCall';
 import {getAddress} from "@/js/config";
 import {getContract, getSelectedAddress} from "@/js/web3";
-import {registerDfFuncEncode} from "@/js/contracts/registerDf";
-import {allowanceEncode, balanceOfEncode} from "@/js/contracts/erc20s";
-import {recDexFuncEncode} from "@/js/contracts/recDex";
-import {dfMainFuncEncode} from "@/js/contracts/dfMain";
-import {dfSortFuncEncode} from "@/js/contracts/dfSort";
-import {nowTimestamp} from "@/js/time";
 import {labubuNFTFuncEncode} from "@/js/contracts/labubuNFT";
 
 export async function getDefaultContract() {
@@ -37,6 +31,9 @@ export async function getCalls(callIds = [], user = '') {
         break;
       case 2:
         calls.push(await labubuNFTFuncEncode('payees', [user]));
+        break;
+      case 3:
+        calls.push(await labubuNFTFuncEncode('fistTokenId', [user]));
         break;
     }
   }
