@@ -37,7 +37,7 @@ export function labubuNFTFuncDecode(func, result) {
   let imp = new Interface(defaultAbi);
   let res = imp.decodeFunctionResult(func, result);
   if (func === 'pendingProfit' || func === 'nftPrice') {
-    return new BigNumber(res[0]).dividedBy(1e18).toFixed(4)
+    return new BigNumber(res[0]).dividedBy(1e18).toFixed(8)
   } else if (func === 'fistTokenId') {
     return new BigNumber(res[0]).toNumber()
   }else if (func === 'payees') {
