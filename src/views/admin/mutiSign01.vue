@@ -36,7 +36,7 @@ async function doSubmitTransaction() {
     if (proposalType.value == 'addOwner' || proposalType.value == 'removeOwner') {
       destinationName = 'multiSign01';
       type = proposalType.value;
-    } else if (proposalType.value == 'usdc' || proposalType.value == 'usdt') {
+    } else if (proposalType.value == 'usdc' || proposalType.value == 'usdt' || proposalType.value == 'labubu') {
       destinationName = proposalType.value;
       type = 'transfer';
     } else if (proposalType.value == 'bnb') {
@@ -159,7 +159,7 @@ async function doExecuteTransaction(id) {
         <div class="btn" @click="showProposal('bnb')">BNB提案</div>
       </div>
       <div class="bottom" style="margin-top: 10px;">
-        <!--        <div class="btn" @click="showProposal('btnBnb')">LP提案</div>-->
+        <div class="btn" @click="showProposal('labubu')">LABUBU提案</div>
         <div class="btn" @click="showProposal('addOwner')">加员提案</div>
         <div class="btn" @click="showProposal('removeOwner')">减员提案</div>
       </div>
@@ -168,14 +168,14 @@ async function doExecuteTransaction(id) {
           <div v-if="proposalType == 'btn'">btn转账</div>
           <div v-if="proposalType == 'bnb'">bnb转账</div>
           <div v-if="proposalType == 'usdt'">usdt转账</div>
-          <!--          <div v-if="proposalType == 'btnBnb'">LP转账</div>-->
+          <div v-if="proposalType == 'labubu'">LP转账</div>
           <div v-if="proposalType == 'addOwner'">加员提案</div>
           <div v-if="proposalType == 'removeOwner'">裁员提案</div>
         </div>
         <div class="input">
           <van-field placeholder="请输入地址" v-model="address"/>
         </div>
-        <div class="input" v-if="proposalType == 'usdt' || proposalType == 'usdc' || proposalType == 'bnb'">
+        <div class="input" v-if="proposalType == 'usdt' || proposalType == 'usdc' || proposalType == 'bnb' || proposalType == 'labubu'">
           <van-field placeholder="请输入转账数量" v-model="amount"/>
         </div>
         <div class='button' style="border-radius: 10px;" @click="doSubmitTransaction()">
