@@ -11,6 +11,7 @@ export const useMultiSignStore = defineStore('multiSign01', {
     usdtBalance: 0,
     usdcBalance: 0,
     bnbBalance: 0,
+    labubuBalance: 0,
     isOwner: false,
     transactions: []
   }),
@@ -24,6 +25,7 @@ export const useMultiSignStore = defineStore('multiSign01', {
         await isOwnerEncode('multiSign01'),
         [address, '0x'],
         await getTransactionsEncode('multiSign01'),
+        await balanceOfEncode('labubu', address),
       ];
       let res = await aggregate(encodeData);
       this.usdtBalance = balanceOfDecode(res[0]);
@@ -31,6 +33,7 @@ export const useMultiSignStore = defineStore('multiSign01', {
       this.isOwner = isOwnerDecode(res[2]);
       this.bnbBalance = formatNumber18(res[3]);
       let txs = getTransactionsDecode(res[4]);
+      this.labubuBalance = balanceOfDecode(res[5]);
 
       this.transactions = [];
       let transactions = await formatTxs(txs);

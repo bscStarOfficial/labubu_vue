@@ -5,6 +5,7 @@ const addresses = {
     multiSign01: "0xB70689CB3Dd1B77E78Dd3f6AbdF4cD83e8D9dF4A",
     usdc: '0x8ac76a51cc950d9822d68b83fe1ad97b32cd580d',
     usdt: "0x55d398326f99059ff775485246999027b3197955",
+    labubu: '0xe2Cd7905C6C119BC5E771D9434Aa3b87D27c703c'
   },
   "5611": {
     labubuNFT: '0x37155f88D3b488883ca7B19E70013a7f890232C4',
@@ -12,6 +13,7 @@ const addresses = {
     multiSign01: '0x2A8FEff263B9e25eCE6daC24d6F88aB21e5300A4',
     usdc: '0x905bD34D98419542fb14ada7d6327e48ef37D88A',
     usdt: "0x905bD34D98419542fb14ada7d6327e48ef37D88A",
+    labubu: "0x905bD34D98419542fb14ada7d6327e48ef37D88A",
   },
 }
 
