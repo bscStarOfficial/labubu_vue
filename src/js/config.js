@@ -13,7 +13,7 @@ const addresses = {
     multiSign01: '0x2A8FEff263B9e25eCE6daC24d6F88aB21e5300A4',
     usdc: '0x905bD34D98419542fb14ada7d6327e48ef37D88A',
     usdt: "0x905bD34D98419542fb14ada7d6327e48ef37D88A",
-    labubu: "0x905bD34D98419542fb14ada7d6327e48ef37D88A",
+    labubu: "0xb3AacB2b8372693602e785393bB4bF98b47fA69E",
   },
 }
 

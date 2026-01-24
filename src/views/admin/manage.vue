@@ -12,16 +12,12 @@ onMounted(async () => {
 })
 
 async function init() {
-  console.log(await dailyBurnRate(0));
-  return;
-
   let res = await Promise.all([
     dailyBurnRate(0),
-    // dailyBurnRate(1),
-    // dailyBurnRate(2),
+    dailyBurnRate(1),
+    dailyBurnRate(2),
   ]);
   dailyBurnRates.value = [res[0], res[1], res[2]];
-  console.log(dailyBurnRates.value)
 }
 
 // async function doTriggerDailyBurnAndMint() {
@@ -44,6 +40,7 @@ async function doSetDailBurnRate() {
     console.log(e)
   }
   loading[0] = false;
+  await init()
 }
 
 
@@ -53,31 +50,31 @@ async function doSetDailBurnRate() {
     <van-nav-bar title="LABUBU管理后台" class="l-navbar"/>
     <div class="l-btns">
       <div class="tabs">
-        <div :class="tab == 0 ? 'tab-a' : 'tab'">每日销毁</div>
+        <div :class="tab == 0 ? 'tab-a' : 'tab'">每日通缩</div>
       </div>
     </div>
     <template v-if="tab == 0">
       <div class="l-info mb10">
         <div class="left">销毁比例</div>
-        <div class="right">{{ dailyBurnRates[0] }}</div>
+        <div class="right">{{ dailyBurnRates[0] / 100 }}%</div>
       </div>
       <div class="l-info mb10">
         <div class="left">项目方比例</div>
-        <div class="right">{{ dailyBurnRates[1] }}</div>
+        <div class="right">{{ dailyBurnRates[1] / 100 }}%</div>
       </div>
       <div class="l-info mb10">
         <div class="left">分红比例</div>
-        <div class="right">{{ dailyBurnRates[2] }}</div>
+        <div class="right">{{ dailyBurnRates[2] / 100 }}%</div>
       </div>
 
       <div class="l-input mb16" style="margin-top: 20px">
-        <van-field v-model="dailyBurnRatesSet[0]" placeholder="输入销毁比例：1%输入1"/>
+        <van-field v-model="dailyBurnRatesSet[0]" placeholder="输入销毁比例(1%输入100)"/>
       </div>
       <div class="l-input mb16" style="margin-top: 20px">
-        <van-field v-model="dailyBurnRatesSet[1]" placeholder="输入项目方比例"/>
+        <van-field v-model="dailyBurnRatesSet[1]" placeholder="输入项目方比例(0.5%输入50)"/>
       </div>
       <div class="l-input mb16" style="margin-top: 20px">
-        <van-field v-model="dailyBurnRatesSet[2]" placeholder="输入分红比例"/>
+        <van-field v-model="dailyBurnRatesSet[2]" placeholder="输入Lp分红比例(3个比例加一起必须等于200)"/>
       </div>
       <div v-if="loading[0]" class="l-btn">
         <van-loading size="22" type="circular" color="#FFF"/>
