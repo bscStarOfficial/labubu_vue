@@ -12,6 +12,10 @@ const router = createRouter({
       path: "/mutiSign01",
       component: () => import("@/views/admin/mutiSign01.vue"),
     },
+    {
+      path: "/admin/manage",
+      component: () => import("@/views/admin/manage.vue"),
+    },
   ],
 });
 
