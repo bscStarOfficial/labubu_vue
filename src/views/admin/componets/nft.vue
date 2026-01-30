@@ -1,10 +1,9 @@
 <script setup>
 import {onMounted, reactive, ref} from 'vue'
-import {getMaxAmount, setMaxAmount} from "@/js/contracts/labubu";
-import {formatEther} from "ethers";
-import {getMaxDepositTokenId, getMaxTokenId, setMaxDepositId, setMaxTokenId} from "@/js/contracts/labubuNFT";
+import {getMaxDepositId, getMaxTokenId, getTotalSupply, setMaxDepositId, setMaxTokenId} from "@/js/contracts/labubuNFT";
 
 const loading = reactive([false, false]);
+const totalSupply = ref('')
 const maxTokenId = ref('0');
 const expectMaxTokenId = ref('');
 const maxDepositId = ref('');
@@ -16,7 +15,8 @@ onMounted(async () => {
 
 async function init() {
   maxTokenId.value = (await getMaxTokenId()).toString();
-  maxDepositId.value = (await getMaxDepositTokenId()).toString();
+  maxDepositId.value = (await getMaxDepositId()).toString();
+  totalSupply.value = (await getTotalSupply()).toString();
 }
 
 async function doSetMaxTokenId() {
@@ -49,11 +49,15 @@ async function doSetMaxDepositId() {
 </script>
 <template>
   <div class="l-info mb10">
-    <div class="left">最大可购买NFT编号</div>
+    <div class="left">已卖出最大NFT编号</div>
+    <div class="right">{{ totalSupply }}</div>
+  </div>
+  <div class="l-info mb10">
+    <div class="left">最大可被购买的NFT编号</div>
     <div class="right">{{ maxTokenId }}</div>
   </div>
   <div class="l-input mb16" style="margin-top: 20px">
-    <van-field v-model="expectMaxTokenId" placeholder="输入最大入金金额"/>
+    <van-field v-model="expectMaxTokenId" placeholder="输入最大可被购买的NFT编号"/>
   </div>
 
   <div v-if="loading[0]" class="l-btn">
@@ -64,11 +68,11 @@ async function doSetMaxDepositId() {
 
   <!--最大可入单NFT编号-->
   <div class="l-info mb10">
-    <div class="left">最大可入单NFT编号</div>
+    <div class="left">最大可入单的NFT编号</div>
     <div class="right">{{ maxDepositId }}</div>
   </div>
   <div class="l-input mb16" style="margin-top: 20px">
-    <van-field v-model="expectMaxDepositId" placeholder="输入最大可入单NFT编号"/>
+    <van-field v-model="expectMaxDepositId" placeholder="输入最大可入单的NFT编号"/>
   </div>
 
   <div v-if="loading[1]" class="l-btn">

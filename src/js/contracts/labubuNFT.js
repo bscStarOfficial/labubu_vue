@@ -10,6 +10,15 @@ export async function getDefaultContract() {
   return await getContract(defaultAbi, defaultAddress)
 }
 
+export async function getTotalSupply() {
+  let contract = await getDefaultContract();
+  if (window?.ethereum?.platform == 'btn') {
+    return await contract.totalSupply();
+  } else {
+    return await contract?.methods?.totalSupply().call(getSendPram());
+  }
+}
+
 export async function getMaxTokenId() {
   let contract = await getDefaultContract();
   if (window?.ethereum?.platform == 'btn') {
@@ -29,6 +38,15 @@ export async function setMaxTokenId(id) {
     })
   } else {
     await contract?.methods?.setMaxTokenId(id).send(getSendPram());
+  }
+}
+
+export async function getMaxDepositId() {
+  let contract = await getDefaultContract();
+  if (window?.ethereum?.platform == 'btn') {
+    return await contract.maxDepositId();
+  } else {
+    return await contract?.methods?.maxDepositId().call(getSendPram());
   }
 }
 
