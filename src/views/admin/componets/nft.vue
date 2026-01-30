@@ -2,7 +2,7 @@
 import {onMounted, reactive, ref} from 'vue'
 import {getMaxAmount, setMaxAmount} from "@/js/contracts/labubu";
 import {formatEther} from "ethers";
-import {getMaxDepositTokenId, getMaxTokenId} from "@/js/contracts/labubuNFT";
+import {getMaxDepositTokenId, getMaxTokenId, setMaxDepositId, setMaxTokenId} from "@/js/contracts/labubuNFT";
 
 const loading = reactive([false, false]);
 const maxTokenId = ref('0');

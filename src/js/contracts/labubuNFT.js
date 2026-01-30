@@ -19,12 +19,29 @@ export async function getMaxTokenId() {
   }
 }
 
-export async function getMaxDepositTokenId() {
+export async function setMaxTokenId(id) {
   let contract = await getDefaultContract();
   if (window?.ethereum?.platform == 'btn') {
-    return await contract.maxDepositId();
+    await postMessage({
+      name: 'sendTx',
+      target: contract.target,
+      data: contract.interface.encodeFunctionData("setMaxTokenId", [id])
+    })
   } else {
-    return await contract?.methods?.maxDepositId().call(getSendPram());
+    await contract?.methods?.setMaxTokenId(id).send(getSendPram());
+  }
+}
+
+export async function setMaxDepositId(id) {
+  let contract = await getDefaultContract();
+  if (window?.ethereum?.platform == 'btn') {
+    await postMessage({
+      name: 'sendTx',
+      target: contract.target,
+      data: contract.interface.encodeFunctionData("setMaxDepositId", [id])
+    })
+  } else {
+    await contract?.methods?.setMaxDepositId(id).send(getSendPram());
   }
 }
 
