@@ -4,7 +4,7 @@ import {dailyBurnRate, setDailBurnRate} from "@/js/contracts/labubu";
 import {keccak256, toUtf8Bytes} from "ethers";
 import {grantRole, hasRole, revokeRole} from "@/js/contracts/manage";
 
-const loading = reactive([false]);
+const loading = reactive([false, false]);
 const user = ref('0x93174A96E8A4823C5aBBB74900D5bACBA2e774b0');
 const checked = ref('');
 
@@ -38,7 +38,7 @@ async function doRevokeRole() {
 async function doGrantRole() {
   let role = keccak256(toUtf8Bytes('Deposit_Whitelist'));
   if (loading[1]) return;
-  loading[0] = true;
+  loading[1] = true;
   try {
     await grantRole(role, user.value);
   } catch (e) {
