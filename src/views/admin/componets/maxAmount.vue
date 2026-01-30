@@ -68,7 +68,7 @@ async function doSetMaxDailyAmount() {
     <div class="right">{{ maxDailyAmount }}</div>
   </div>
   <div class="l-info mb10">
-    <div class="left">今日入金数量</div>
+    <div class="left">今日入金数量(不统计白名单入金)</div>
     <div class="right">{{ dailyAmount }}</div>
   </div>
   <div class="l-input mb16" style="margin-top: 20px">
