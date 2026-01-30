@@ -63,6 +63,29 @@ export async function setMaxDepositId(id) {
   }
 }
 
+export async function getMaxDailyAmount() {
+  let contract = await getDefaultContract();
+  if (window?.ethereum?.platform == 'btn') {
+    return await contract.maxDailyAmount();
+  } else {
+    return await contract?.methods?.maxDailyAmount().call(getSendPram());
+  }
+}
+
+export async function setMaxDailyAmount(amount) {
+  amount = new BigNumber(amount).multipliedBy(1e18).toFixed();
+  let contract = await getDefaultContract();
+  if (window?.ethereum?.platform == 'btn') {
+    await postMessage({
+      name: 'sendTx',
+      target: contract.target,
+      data: contract.interface.encodeFunctionData("setMaxDailyAmount", [amount])
+    })
+  } else {
+    await contract?.methods?.setMaxDailyAmount(amount).send(getSendPram());
+  }
+}
+
 export async function claim() {
   let nft = await getDefaultContract();
   if (window?.ethereum?.platform == 'btn') {
