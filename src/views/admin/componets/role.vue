@@ -5,7 +5,7 @@ import {keccak256, toUtf8Bytes} from "ethers";
 import {grantRole, hasRole, revokeRole} from "@/js/contracts/manage";
 
 const loading = reactive([false, false]);
-const user = ref('0x93174A96E8A4823C5aBBB74900D5bACBA2e774b0');
+const user = ref('');
 const checked = ref('');
 
 onMounted(async () => {
@@ -50,7 +50,7 @@ async function doGrantRole() {
 
 </script>
 <template>
-  <div class="l-title">投入白名单</div>
+  <div class="l-title">白名单查询</div>
   <div class="l-input mb28">
     <div class="input">
       <van-field v-model="user" placeholder="输入地址"/>
