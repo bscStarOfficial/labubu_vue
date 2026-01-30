@@ -5,7 +5,7 @@ import {formatEther} from "ethers";
 
 const loading = reactive([false]);
 const maxAmount = ref('0');
-const expectMaxAmount = ref(0);
+const expectMaxAmount = ref('');
 
 onMounted(async () => {
   await init()
@@ -24,6 +24,7 @@ async function doSetMaxAmount() {
     console.log(e)
   }
   loading[0] = false;
+  expectMaxAmount.value = ''
   await init()
 }
 
@@ -35,13 +36,13 @@ async function doSetMaxAmount() {
     <div class="right">{{ maxAmount }}</div>
   </div>
   <div class="l-input mb16" style="margin-top: 20px">
-    <van-field v-model="expectMaxAmount" placeholder="输入销毁比例(1%输入100)"/>
+    <van-field v-model="expectMaxAmount" placeholder="输入最大入金金额"/>
   </div>
 
   <div v-if="loading[0]" class="l-btn">
     <van-loading size="22" type="circular" color="#FFF"/>
   </div>
-  <div v-else class="l-btn" @click="doSetMaxAmount()">设置比例</div>
+  <div v-else class="l-btn" @click="doSetMaxAmount()">设置</div>
   <div style="height: 20px;"></div>
 </template>
 <style scoped>
