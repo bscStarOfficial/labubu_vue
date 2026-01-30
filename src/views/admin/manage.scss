@@ -16,6 +16,10 @@
       font-weight: 500;
     }
   }
+  :deep(.van-radio__label) {
+    color: #fff;
+    font-size: 14px;
+  }
   .l-btns {
     width: 345px;
     height: 26px;
