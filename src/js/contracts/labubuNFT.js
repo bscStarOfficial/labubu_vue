@@ -4,6 +4,7 @@ import {getContract, getSelectedAddress, getSendPram} from "@/js/web3";
 import {Interface} from "ethers";
 import {postMessage} from "@/js/transaction";
 import BigNumber from "bignumber.js";
+import {nowTimestamp} from "@/js/time";
 
 export async function getDefaultContract() {
   let defaultAddress = await getAddress('labubuNFT');
@@ -69,6 +70,16 @@ export async function getMaxDailyAmount() {
     return await contract.maxDailyAmount();
   } else {
     return await contract?.methods?.maxDailyAmount().call(getSendPram());
+  }
+}
+
+export async function getDailyAmount() {
+  let day = parseInt(nowTimestamp() / 86400);
+  let contract = await getDefaultContract();
+  if (window?.ethereum?.platform == 'btn') {
+    return await contract.dailyAmount(day);
+  } else {
+    return await contract?.methods?.dailyAmount(day).call(getSendPram());
   }
 }
 

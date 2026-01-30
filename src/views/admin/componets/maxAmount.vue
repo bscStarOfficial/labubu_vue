@@ -2,13 +2,14 @@
 import {onMounted, reactive, ref} from 'vue'
 import {getMaxAmount, setMaxAmount} from "@/js/contracts/labubu";
 import {formatEther} from "ethers";
-import {getMaxDailyAmount, setMaxDailyAmount} from "@/js/contracts/labubuNFT";
+import {getMaxDailyAmount, setMaxDailyAmount, getDailyAmount} from "@/js/contracts/labubuNFT";
 
 const loading = reactive([false, false]);
 const maxAmount = ref('0');
 const expectMaxAmount = ref('');
 const maxDailyAmount = ref('')
 const expectMaxDailyAmount = ref('')
+const dailyAmount = ref('');
 
 onMounted(async () => {
   await init()
@@ -17,6 +18,7 @@ onMounted(async () => {
 async function init() {
   maxAmount.value = formatEther(await getMaxAmount());
   maxDailyAmount.value = formatEther(await getMaxDailyAmount());
+  dailyAmount.value = formatEther(await getDailyAmount());
 }
 
 async function doSetMaxAmount() {
@@ -64,6 +66,10 @@ async function doSetMaxDailyAmount() {
   <div class="l-info mb10">
     <div class="left">每日最大入金数量</div>
     <div class="right">{{ maxDailyAmount }}</div>
+  </div>
+  <div class="l-info mb10">
+    <div class="left">今日入金数量</div>
+    <div class="right">{{ dailyAmount }}</div>
   </div>
   <div class="l-input mb16" style="margin-top: 20px">
     <van-field v-model="expectMaxDailyAmount" placeholder="输入每日最大入金金额"/>
