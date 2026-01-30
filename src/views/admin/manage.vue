@@ -1,7 +1,8 @@
 <script setup>
 import {onMounted, ref} from 'vue'
 import dailyBurn from "./componets/dailyBurn.vue";
-import deposit from "./componets/deposit.vue";
+import role from "./componets/role.vue";
+import maxAmount from "./componets/maxAmount.vue";
 
 const tab = ref(0)
 onMounted(async () => {
@@ -15,10 +16,12 @@ onMounted(async () => {
       <div class="tabs">
         <div :class="tab == 0 ? 'tab-a' : 'tab'" @click="tab = 0">每日通缩</div>
         <div :class="tab == 1 ? 'tab-a' : 'tab'" @click="tab = 1">白名单</div>
+        <div :class="tab == 2 ? 'tab-a' : 'tab'" @click="tab = 2">入单金额</div>
       </div>
     </div>
     <dailyBurn v-if="tab == 0"></dailyBurn>
-    <deposit v-if="tab == 1"></deposit>
+    <role v-if="tab == 1"></role>
+    <maxAmount v-if="tab == 2"></maxAmount>
   </div>
 </template>
 <style scoped>
