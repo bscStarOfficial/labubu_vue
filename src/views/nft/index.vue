@@ -6,12 +6,12 @@ import {showDialog} from "vant";
 import {getNFTImage} from "@/js/config";
 import {useLabubuNFTStore} from "@/stores/labubuNFT";
 import {getSelectedAddress} from "@/js/web3";
-import {replaceMiddleWithAsterisks} from "@/js/utils";
+import {replaceMiddleWithAsterisks, toFixed} from "@/js/utils";
 import {claim} from "@/js/contracts/labubuNFT";
 
 const store = useLabubuNFTStore();
 onMounted(async () => {
-  await store.setState([0, 1, 2, 3]);
+  await store.setState([0, 1, 2, 3, 4]);
 })
 
 // NFT合集列表
@@ -102,8 +102,8 @@ const claimEarnings = async () => {
                 <div class="info-value received">{{ store.payee.released }}</div>
               </div>
               <div class="info-item">
-                <div class="info-label">总收益额度</div>
-                <div class="info-value pending">{{ store.recoupment.quota }}</div>
+                <div class="info-label">入单总收益额度</div>
+                <div class="info-value pending">{{ toFixed(store.recoupment.quota, 2) }}</div>
               </div>
               <div class="info-item">
                 <div class="info-label">剩余额度</div>
