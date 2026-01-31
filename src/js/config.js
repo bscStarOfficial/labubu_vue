@@ -6,7 +6,8 @@ const addresses = {
     usdc: '0x8ac76a51cc950d9822d68b83fe1ad97b32cd580d',
     usdt: "0x55d398326f99059ff775485246999027b3197955",
     labubu: '0xe2Cd7905C6C119BC5E771D9434Aa3b87D27c703c',
-    manage: '0x504658d8ab5B2b0bb7823Eb111Cbe9DC67496279'
+    manage: '0x504658d8ab5B2b0bb7823Eb111Cbe9DC67496279',
+    recoupment: '0xA3458D8F8f6D32DABB838dcdEd42a9E781373aFE'
   },
   "5611": {
     labubuNFT: '0x37155f88D3b488883ca7B19E70013a7f890232C4',
@@ -15,7 +16,8 @@ const addresses = {
     usdc: '0x905bD34D98419542fb14ada7d6327e48ef37D88A',
     usdt: "0x905bD34D98419542fb14ada7d6327e48ef37D88A",
     labubu: "0xb3AacB2b8372693602e785393bB4bF98b47fA69E",
-    manage: '0xc79Aff115A7B3fa0d04C8787f8f379Fcc3C71a24'
+    manage: '0xc79Aff115A7B3fa0d04C8787f8f379Fcc3C71a24',
+    recoupment: '0xf7Bb57AF57C84Bb27ce83bF661c9345d247701A9'
   },
 }
 
