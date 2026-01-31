@@ -2,6 +2,7 @@ import {defineStore} from 'pinia'
 import {aggregate, getCalls} from "@/js/contracts/multiCall";
 import {labubuNFTFuncDecode} from "@/js/contracts/labubuNFT";
 import BigNumber from "bignumber.js";
+import {recoupmentTFuncDecode, recoupmentTFuncEncode} from "@/js/contracts/recoupment";
 
 export const useLabubuNFTStore = defineStore('labubuNFT', {
   // 为了完整类型推理，推荐使用箭头函数
@@ -12,12 +13,20 @@ export const useLabubuNFTStore = defineStore('labubuNFT', {
     payee: {
       released: 0,
       available: 0
+    },
+    recoupment: {
+      deposit: 0,
+      quota: 0,
+      claimed: 0
     }
   }),
   getters: {
     availableReward(state) {
       return new BigNumber(state.pendingProfit).plus(state.payee.available).toNumber();
     },
+    recoupmentLeftQuota(state) {
+      return new BigNumber(state.recoupment.quota).minus(state.recoupment.claimed).toFixed(2);
+    }
   },
   actions: {
     async setState(callIds = []) {
@@ -35,6 +44,9 @@ export const useLabubuNFTStore = defineStore('labubuNFT', {
             break;
           case 3:
             this.fistTokenId = labubuNFTFuncDecode('fistTokenId', data);
+            break;
+          case 4:
+            this.recoupment = recoupmentTFuncDecode('recoupments', data);
             break;
         }
       })

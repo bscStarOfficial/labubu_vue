@@ -2,6 +2,7 @@ import defaultAbi from '@/abis/multiCall';
 import {getAddress} from "@/js/config";
 import {getContract, getSelectedAddress, getSendPram} from "@/js/web3";
 import {labubuNFTFuncEncode} from "@/js/contracts/labubuNFT";
+import {recoupmentTFuncEncode} from "@/js/contracts/recoupment";
 
 export async function getDefaultContract() {
   let defaultAddress = await getAddress("multiCall");
@@ -34,6 +35,9 @@ export async function getCalls(callIds = [], user = '') {
         break;
       case 3:
         calls.push(await labubuNFTFuncEncode('fistTokenId', [user]));
+        break;
+      case 4:
+        calls.push(await recoupmentTFuncEncode('recoupments', [user]));
         break;
     }
   }

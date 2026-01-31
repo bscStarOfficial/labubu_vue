@@ -101,6 +101,14 @@ const claimEarnings = async () => {
                 <div class="info-label">已分红金额</div>
                 <div class="info-value received">{{ store.payee.released }}</div>
               </div>
+              <div class="info-item">
+                <div class="info-label">总收益额度</div>
+                <div class="info-value pending">{{ store.recoupment.quota }}</div>
+              </div>
+              <div class="info-item">
+                <div class="info-label">剩余额度</div>
+                <div class="info-value received">{{ store.recoupmentLeftQuota }}</div>
+              </div>
             </div>
             <van-button
               class="earnings-btn"
