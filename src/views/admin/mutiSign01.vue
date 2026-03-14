@@ -174,7 +174,7 @@ async function doExecuteTransaction(id) {
         <div class="btn" @click="showProposal('removeOwner')">减员提案</div>
       </div>
       <div class="bottom" style="margin-top: 10px;">
-        <div class="btn" @click="showProposal('labubu')">LP提案</div>
+        <div class="btn" @click="showProposal('lp')">LP提案</div>
       </div>
       <van-popup v-model:show="show.proposal" position="bottom" :style="{ width: '100%', height: '60%' }">
         <div class="title">
