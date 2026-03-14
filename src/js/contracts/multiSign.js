@@ -135,6 +135,7 @@ export async function decodeData(data, desc) {
   let usdtTransferHash = solidityPackedKeccak256(["string"], ["usdt"]);
   let bnbTransferHash = solidityPackedKeccak256(["string"], ['bnb']);
   let labubuTransferHash = solidityPackedKeccak256(["string"], ['labubu']);
+  let lpTransferHash = solidityPackedKeccak256(["string"], ['lp']);
   let addOwnerHash = solidityPackedKeccak256(["string"], ["addOwner"]);
   let removeOwnerHash = solidityPackedKeccak256(["string"], ["removeOwner"]);
 
@@ -165,6 +166,13 @@ export async function decodeData(data, desc) {
     return {
       address: res[0],
       amount: "LABUBU " + formatEther(res[1])
+    };
+  } else if (desc == lpTransferHash) {
+    imp = new Interface(erc20Abi);
+    res = imp.decodeFunctionData("transfer", data);
+    return {
+      address: res[0],
+      amount: "LP " + formatEther(res[1])
     };
   } else if (desc == bnbTransferHash) {
     return {

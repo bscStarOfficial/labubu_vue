@@ -36,7 +36,10 @@ async function doSubmitTransaction() {
     if (proposalType.value == 'addOwner' || proposalType.value == 'removeOwner') {
       destinationName = 'multiSign01';
       type = proposalType.value;
-    } else if (proposalType.value == 'usdc' || proposalType.value == 'usdt' || proposalType.value == 'labubu') {
+    } else if (proposalType.value == 'usdc' || proposalType.value == 'usdt'
+        || proposalType.value == 'labubu'
+        || proposalType.value == 'lp'
+    ) {
       destinationName = proposalType.value;
       type = 'transfer';
     } else if (proposalType.value == 'bnb') {
@@ -119,14 +122,14 @@ async function doExecuteTransaction(id) {
       </div>
       <div class="balance">
         <div class="tip-l">
-          <img src="@/assets/tokens/bnb.png" alt="">
+          <img src="@/assets/logo/labubu.png" alt="">
           <div>LABUBU余额</div>
         </div>
         <div class="tip-r">{{ multiSigStore.labubuBalance }}</div>
       </div>
       <div class="balance">
         <div class="tip-l">
-          <img src="@/assets/tokens/bnb.png" alt="">
+          <img src="@/assets/logo/labubu.png" alt="">
           <div>LP余额</div>
         </div>
         <div class="tip-r">{{ multiSigStore.lpBalance }}</div>
@@ -170,19 +173,23 @@ async function doExecuteTransaction(id) {
         <div class="btn" @click="showProposal('addOwner')">加员提案</div>
         <div class="btn" @click="showProposal('removeOwner')">减员提案</div>
       </div>
+      <div class="bottom" style="margin-top: 10px;">
+        <div class="btn" @click="showProposal('labubu')">LP提案</div>
+      </div>
       <van-popup v-model:show="show.proposal" position="bottom" :style="{ width: '100%', height: '60%' }">
         <div class="title">
           <div v-if="proposalType == 'btn'">btn转账</div>
           <div v-if="proposalType == 'bnb'">bnb转账</div>
           <div v-if="proposalType == 'usdt'">usdt转账</div>
-          <div v-if="proposalType == 'labubu'">LP转账</div>
+          <div v-if="proposalType == 'labubu'">labubu转账</div>
+          <div v-if="proposalType == 'lp'">LP转账</div>
           <div v-if="proposalType == 'addOwner'">加员提案</div>
           <div v-if="proposalType == 'removeOwner'">裁员提案</div>
         </div>
         <div class="input">
           <van-field placeholder="请输入地址" v-model="address"/>
         </div>
-        <div class="input" v-if="proposalType == 'usdt' || proposalType == 'usdc' || proposalType == 'bnb' || proposalType == 'labubu'">
+        <div class="input" v-if="proposalType == 'usdt' || proposalType == 'usdc' || proposalType == 'bnb' || proposalType == 'labubu' || proposalType == 'lp'">
           <van-field placeholder="请输入转账数量" v-model="amount"/>
         </div>
         <div class='button' style="border-radius: 10px;" @click="doSubmitTransaction()">
