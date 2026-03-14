@@ -124,6 +124,13 @@ async function doExecuteTransaction(id) {
         </div>
         <div class="tip-r">{{ multiSigStore.labubuBalance }}</div>
       </div>
+      <div class="balance">
+        <div class="tip-l">
+          <img src="@/assets/tokens/bnb.png" alt="">
+          <div>LP余额</div>
+        </div>
+        <div class="tip-r">{{ multiSigStore.lpBalance }}</div>
+      </div>
       <div class="operate-title">操作记录</div>
       <div class="table">
         <div class="name">
