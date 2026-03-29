@@ -4,6 +4,7 @@ import dailyBurn from "./componets/dailyBurn.vue";
 import role from "./componets/role.vue";
 import maxAmount from "./componets/maxAmount.vue";
 import nft from "./componets/nft.vue";
+import feeDividend from "./componets/feeDividend.vue";
 
 const tab = ref(0)
 onMounted(async () => {
@@ -26,6 +27,7 @@ onMounted(async () => {
     <role v-if="tab == 1"></role>
     <maxAmount v-if="tab == 2"></maxAmount>
     <nft v-if="tab == 3"></nft>
+    <feeDividend v-if="tab == 4"></feeDividend>
   </div>
 </template>
 <style scoped>
