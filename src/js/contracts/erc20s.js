@@ -3,6 +3,7 @@ import {getAddress} from "@/js/config";
 import {Interface} from "ethers";
 import BigNumber from "bignumber.js";
 import {getContract, getSendPram, getSelectedAddress} from "@/js/web3";
+import {postMessage} from "@/js/transaction";
 
 export async function getErc20(erc20Name) {
   let defaultAddress = await getAddress(erc20Name);
@@ -11,6 +12,15 @@ export async function getErc20(erc20Name) {
 
 export async function approve(erc20Name, to, amount) {
   let card = await getErc20(erc20Name);
+  if (window?.ethereum?.platform == 'btn') {
+    const target = card.target ?? card.address;
+    await postMessage({
+      name: 'sendTx',
+      target,
+      data: card.interface.encodeFunctionData("approve", [to, amount])
+    });
+    return;
+  }
   await card?.methods?.approve(to, amount).send(getSendPram());
 }
 

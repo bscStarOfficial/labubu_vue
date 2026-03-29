@@ -2,7 +2,7 @@
 import {ref, reactive} from 'vue';
 import BigNumber from "bignumber.js";
 import {userInfo, setShare, sendReward} from "@/js/contracts/swapFeeDividend";
-import {allowance} from "@/js/contracts/erc20s";
+import {allowance, approve} from "@/js/contracts/erc20s";
 import {getAddress} from "@/js/config";
 
 const address = ref('');
@@ -87,8 +87,9 @@ async function handleSendReward() {
     const approved = await allowance('labubu', spender);
     const approvedAmount = new BigNumber(approved?.toString?.() ?? approved ?? '0');
     if (approvedAmount.lt(amount)) {
-      tip.value = '请先将 labubu 授权给 swapFeeDividend 合约';
-      return;
+      tip.value = '正在通过钱包授权 Labubu 给 swapFeeDividend';
+      await approve('labubu', spender, "100000000000000");
+      tip.value = '授权完成，继续充值';
     }
     await sendReward(amount);
     tip.value = '充值分红提交成功';
