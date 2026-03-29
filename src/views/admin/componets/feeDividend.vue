@@ -107,14 +107,6 @@ async function handleSendReward() {
     <div class="left">分红权重</div>
     <div class="right">{{ shareInfo.share }}</div>
   </div>
-  <div class="l-info mb10">
-    <div class="left">奖励债务</div>
-    <div class="right">{{ shareInfo.rewardDebt }}</div>
-  </div>
-  <div class="l-info mb16">
-    <div class="left">可领取分红</div>
-    <div class="right">{{ shareInfo.available }}</div>
-  </div>
   <div class="l-input mb16" style="margin-top: 12px">
     <div class="input">
       <van-field v-model="shareInput" placeholder="输入权重数量" />
@@ -126,7 +118,7 @@ async function handleSendReward() {
   <div v-else class="l-btn" @click="handleSetShare">设置权重</div>
   <div class="l-input mb16" style="margin-top: 20px">
     <div class="input">
-      <van-field v-model="rewardAmount" placeholder="输入充值金额（uint256）" />
+      <van-field v-model="rewardAmount" placeholder="输入充值金额" />
     </div>
   </div>
   <div v-if="loading.sendReward" class="l-btn">

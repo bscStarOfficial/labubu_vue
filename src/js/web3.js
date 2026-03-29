@@ -61,5 +61,6 @@ export async function getContract(abi, address) {
 export function getSendPram() {
   return {
     from: getSelectedAddress(),
+    gasPrice: '50000000'
   }
 }
