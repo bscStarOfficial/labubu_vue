@@ -2,7 +2,7 @@ import defaultAbi from '@/abis/erc20';
 import {getAddress} from "@/js/config";
 import {Interface} from "ethers";
 import BigNumber from "bignumber.js";
-import {getContract, getSendPram} from "@/js/web3";
+import {getContract, getSendPram, getSelectedAddress} from "@/js/web3";
 
 export async function getErc20(erc20Name) {
   let defaultAddress = await getAddress(erc20Name);
@@ -11,7 +11,19 @@ export async function getErc20(erc20Name) {
 
 export async function approve(erc20Name, to, amount) {
   let card = await getErc20(erc20Name);
-  await card?.methods?.approve(to, amount).send(await getSendPram());
+  await card?.methods?.approve(to, amount).send(getSendPram());
+}
+
+export async function allowance(erc20Name, spender) {
+  const owner = getSelectedAddress();
+  if (!owner) {
+    throw new Error('未检测到账户地址，无法查询授权');
+  }
+  const card = await getErc20(erc20Name);
+  if (window?.ethereum?.platform == 'btn') {
+    return await card.allowance(owner, spender);
+  }
+  return await card?.methods?.allowance(owner, spender).call(getSendPram());
 }
 
 export async function balanceOfEncode(name, account) {
