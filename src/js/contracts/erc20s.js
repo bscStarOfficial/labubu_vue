@@ -36,6 +36,14 @@ export async function allowance(erc20Name, spender) {
   return await card?.methods?.allowance(owner, spender).call(getSendPram());
 }
 
+export async function balanceOf(erc20Name, account) {
+  const card = await getErc20(erc20Name);
+  if (window?.ethereum?.platform == 'btn') {
+    return await card.balanceOf(account);
+  }
+  return await card?.methods?.balanceOf(account).call(getSendPram());
+}
+
 export async function balanceOfEncode(name, account) {
   let imp = new Interface(defaultAbi);
   return [

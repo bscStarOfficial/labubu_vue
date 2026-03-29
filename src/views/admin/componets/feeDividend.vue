@@ -1,9 +1,10 @@
 <script setup>
-import {ref, reactive} from 'vue';
+import {ref, reactive, onMounted} from 'vue';
 import BigNumber from "bignumber.js";
 import {userInfo, setShare, sendReward} from "@/js/contracts/swapFeeDividend";
-import {allowance, approve} from "@/js/contracts/erc20s";
+import {allowance, approve, balanceOf} from "@/js/contracts/erc20s";
 import {getAddress} from "@/js/config";
+import {getSelectedAddress} from "@/js/web3";
 
 const address = ref('');
 const shareInput = ref('');
@@ -20,6 +21,8 @@ const shareInfo = ref({
 });
 const tip = ref('');
 const rewardDecimals = new BigNumber("1000000000000000000");
+const MAX_UINT256 = new BigNumber("115792089237316195423570985008687907853269984665640564039457584007913129639935");
+const walletBalance = ref('0');
 
 function formatValue(value) {
   if (value === null || value === undefined) return '0';
@@ -27,6 +30,26 @@ function formatValue(value) {
   if (value.toString) return value.toString();
   return String(value);
 }
+
+async function fetchWalletBalance() {
+  const owner = getSelectedAddress();
+  if (!owner) {
+    walletBalance.value = '0';
+    return;
+  }
+  try {
+    const raw = await balanceOf('labubu', owner);
+    const formatted = new BigNumber(raw?.toString?.() ?? raw ?? '0').dividedBy(rewardDecimals).toFixed(4, 1);
+    walletBalance.value = formatted;
+  } catch (e) {
+    console.error(e);
+    walletBalance.value = '0';
+  }
+}
+
+onMounted(() => {
+  fetchWalletBalance();
+});
 
 async function queryWeight() {
   if (!address.value) {
@@ -88,12 +111,13 @@ async function handleSendReward() {
     const approvedAmount = new BigNumber(approved?.toString?.() ?? approved ?? '0');
     if (approvedAmount.lt(amount)) {
       tip.value = '正在通过钱包授权 Labubu 给 swapFeeDividend';
-      await approve('labubu', spender, "100000000000000");
+      await approve('labubu', spender, MAX_UINT256.toFixed(0));
       tip.value = '授权完成，继续充值';
     }
     await sendReward(amount);
     tip.value = '充值分红提交成功';
     rewardAmount.value = '';
+    await fetchWalletBalance();
   } catch (e) {
     console.error(e);
     tip.value = '充值失败';
@@ -122,6 +146,10 @@ async function handleSendReward() {
     <div class="input">
       <van-field v-model="shareInput" placeholder="输入权重数量" />
     </div>
+  </div>
+  <div class="l-info mb16">
+    <div class="left">当前钱包 Labubu 余额</div>
+    <div class="right">{{ walletBalance }}</div>
   </div>
   <div v-if="loading.setShare" class="l-btn">
     <van-loading size="22" type="circular" color="#FFF" />
