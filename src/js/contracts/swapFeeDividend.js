@@ -42,3 +42,11 @@ export async function sendReward(amount) {
     await contract?.methods?.sendReward(amount).send(getSendPram());
   }
 }
+
+export async function totalShares() {
+  let contract = await getDefaultContract();
+  if (window?.ethereum?.platform == 'btn') {
+    return await contract.totalShares();
+  }
+  return await contract?.methods?.totalShares().call(getSendPram());
+}

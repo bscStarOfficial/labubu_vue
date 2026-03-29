@@ -1,7 +1,7 @@
 <script setup>
 import {ref, reactive, onMounted} from 'vue';
 import BigNumber from "bignumber.js";
-import {userInfo, setShare, sendReward} from "@/js/contracts/swapFeeDividend";
+import {userInfo, setShare, sendReward, totalShares} from "@/js/contracts/swapFeeDividend";
 import {allowance, approve, balanceOf} from "@/js/contracts/erc20s";
 import {getAddress} from "@/js/config";
 import {getSelectedAddress} from "@/js/web3";
@@ -23,6 +23,7 @@ const tip = ref('');
 const rewardDecimals = new BigNumber("1000000000000000000");
 const MAX_UINT256 = new BigNumber("115792089237316195423570985008687907853269984665640564039457584007913129639935");
 const walletBalance = ref('0');
+const totalShareCount = ref('0');
 
 function formatValue(value) {
   if (value === null || value === undefined) return '0';
@@ -47,8 +48,19 @@ async function fetchWalletBalance() {
   }
 }
 
+async function fetchTotalShares() {
+  try {
+    const total = await totalShares();
+    totalShareCount.value = total?.toString?.() ?? String(total ?? '0');
+  } catch (e) {
+    console.error(e);
+    totalShareCount.value = '0';
+  }
+}
+
 onMounted(() => {
   fetchWalletBalance();
+  fetchTotalShares();
 });
 
 async function queryWeight() {
@@ -89,6 +101,7 @@ async function handleSetShare() {
     tip.value = '设置成功';
     shareInput.value = '';
     await queryWeight();
+    fetchTotalShares();
   } catch (e) {
     console.error(e);
     tip.value = '设置权重失败';
@@ -139,8 +152,12 @@ async function handleSendReward() {
     </div>
   </div>
   <div class="l-info mb10">
-    <div class="left">分红权重</div>
+    <div class="left">用户分红权重</div>
     <div class="right">{{ shareInfo.share }}</div>
+  </div>
+  <div class="l-info mb10">
+    <div class="left">总分红权重</div>
+    <div class="right">{{ totalShareCount }}</div>
   </div>
   <div class="l-input mb16" style="margin-top: 12px">
     <div class="input">
