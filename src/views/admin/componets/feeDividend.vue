@@ -39,7 +39,7 @@ async function fetchWalletBalance() {
   }
   try {
     const raw = await balanceOf('labubu', owner);
-    const formatted = new BigNumber(raw?.toString?.() ?? raw ?? '0').dividedBy(rewardDecimals).toFixed(4, 1);
+    const formatted = new BigNumber(raw.toString()).dividedBy(rewardDecimals).toFixed(4, 1);
     walletBalance.value = formatted;
   } catch (e) {
     console.error(e);
@@ -147,10 +147,6 @@ async function handleSendReward() {
       <van-field v-model="shareInput" placeholder="输入权重数量" />
     </div>
   </div>
-  <div class="l-info mb16">
-    <div class="left">当前钱包 Labubu 余额</div>
-    <div class="right">{{ walletBalance }}</div>
-  </div>
   <div v-if="loading.setShare" class="l-btn">
     <van-loading size="22" type="circular" color="#FFF" />
   </div>
@@ -159,6 +155,10 @@ async function handleSendReward() {
     <div class="input">
       <van-field v-model="rewardAmount" placeholder="输入充值金额" />
     </div>
+  </div>
+  <div class="l-info mb16">
+    <div class="left">当前钱包 Labubu 余额</div>
+    <div class="right">{{ walletBalance }}</div>
   </div>
   <div v-if="loading.sendReward" class="l-btn">
     <van-loading size="22" type="circular" color="#FFF" />
