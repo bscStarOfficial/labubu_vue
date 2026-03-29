@@ -1,14 +1,26 @@
 .liquidity {
-  width: 375px;
-  height: 100vh;
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 100vh;
+  padding: 20px 16px 32px;
   background: #191d24;
+  overflow-x: hidden;
+
+  *,
+  *::before,
+  *::after {
+    box-sizing: inherit;
+  }
+
   .l-navbar {
-    width: 375px;
+    width: 100%;
     height: 50px;
     background: #191d24;
-    position: fixed;
+    position: sticky;
     top: 0;
     left: 0;
+    z-index: 10;
+
     :deep(.van-nav-bar__title) {
       color: #fff;
       font-family: PingFangSC;
@@ -16,51 +28,69 @@
       font-weight: 500;
     }
   }
+
   :deep(.van-radio__label) {
     color: #fff;
     font-size: 14px;
   }
+
+  :deep(.van-radio-group) {
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
   .l-btns {
-    width: 345px;
-    height: 26px;
-    padding: 70px 11px 0 19px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 20px;
+    width: 100%;
+    margin: 0 auto 24px;
+
     .tabs {
-      width: 320px;
-      height: 26px;
       display: flex;
       align-items: center;
-      justify-content: space-between;
-      .tab {
-        width: 58px;
-        height: 26px;
-        font-family: Rubik;
-        font-size: 12px;
-        color: #afb4b9;
-        display: flex;
-        align-items: center;
-        justify-content: center;
+      gap: 10px;
+      width: 100%;
+      overflow-x: auto;
+      padding-bottom: 4px;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+
+      &::-webkit-scrollbar {
+        display: none;
       }
+
+      .tab,
       .tab-a {
-        width: 58px;
-        height: 26px;
+        flex: 0 0 auto;
+        min-width: max-content;
+        height: 34px;
+        padding: 0 14px;
+        border-radius: 8px;
         font-family: Rubik;
-        font-size: 12px;
-        color: #fff;
+        font-size: 13px;
         display: flex;
         align-items: center;
         justify-content: center;
+        white-space: nowrap;
+        transition: background-color 0.2s ease, color 0.2s ease;
+      }
+
+      .tab {
+        color: #afb4b9;
+        background: #232a31;
+      }
+
+      .tab-a {
+        color: #fff;
         background-color: #3f4b5b;
-        border-radius: 6px;
+        box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.04);
       }
     }
+
     .batch {
-      width: 97px;
-      height: 24px;
-      border-radius: 4px;
+      width: fit-content;
+      min-width: 97px;
+      height: 32px;
+      padding: 0 12px;
+      border-radius: 6px;
       border: solid 1px #e89c3a;
       color: #e89c3a;
       font-family: PingFangSC;
@@ -71,75 +101,91 @@
       justify-content: center;
     }
   }
+
   .l-cards {
-    width: 375px;
-    height: calc(100vh - 190px);
-    margin-bottom: 10px;
-    overflow: scroll;
+    width: 100%;
+    max-height: calc(100vh - 220px);
+    margin-bottom: 12px;
+    overflow: auto;
+    padding-right: 2px;
+
     .card {
-      width: 344px;
-      height: 69px;
+      width: 100%;
+      min-height: 69px;
       margin-bottom: 12px;
-      padding: 8px 11px 11px 20px;
+      padding: 12px 16px;
       background-color: #232a31;
+      border-radius: 12px;
+
       .top {
-        width: 344px;
-        height: 30px;
+        width: 100%;
+        min-height: 30px;
         border-bottom: 1px solid #2a3138;
         display: flex;
         align-items: center;
         justify-content: flex-start;
-        margin-bottom: 7.5px;
+        margin-bottom: 10px;
+        padding-bottom: 8px;
+
         img {
-          width: 15.2px;
-          height: 15.3px;
-          margin-right: 5.5px;
+          width: 15px;
+          height: 15px;
+          margin-right: 6px;
         }
+
         div {
           font-family: Rubik;
           font-size: 12px;
           color: #afb4b9;
         }
       }
+
       .content {
-        width: 344px;
-        height: 30px;
+        width: 100%;
+        min-height: 30px;
         display: flex;
         align-items: center;
         justify-content: space-between;
+        gap: 12px;
+
         .rows {
-          width: 300px;
-          height: 30px;
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
+          flex: 1;
+          min-width: 0;
+          display: grid;
+          grid-template-columns: repeat(3, minmax(0, 1fr));
+          gap: 12px;
+
           .row {
-            width: 100px;
-            height: 30px;
+            width: 100%;
+            min-height: 30px;
+
             .name {
-              height: 12px;
-              line-height: 12px;
               margin-bottom: 5px;
               font-family: Rubik;
               font-size: 12px;
+              line-height: 1.2;
               text-align: center;
               color: #afb4b9;
             }
+
             .value {
-              height: 10px;
-              line-height: 10px;
               font-family: Rubik;
               font-size: 10px;
+              line-height: 1.2;
               text-align: center;
               color: #afb4b9;
+              word-break: break-all;
             }
           }
         }
+
         .btn-y {
-          width: 44px;
-          height: 18px;
+          flex: 0 0 auto;
+          min-width: 44px;
+          height: 24px;
+          padding: 0 8px;
           border-radius: 4px;
-          background-color: #2D281C;
+          background-color: #2d281c;
           display: flex;
           align-items: center;
           justify-content: center;
@@ -147,9 +193,12 @@
           font-size: 12px;
           color: #efa600;
         }
+
         .btn {
-          width: 43px;
+          flex: 0 0 auto;
+          min-width: 52px;
           height: 30px;
+          padding: 0 12px;
           border-radius: 8px;
           background-color: #ff801a;
           font-family: Rubik;
@@ -162,11 +211,16 @@
       }
     }
   }
+
   .l-page {
-    width: 250px;
-    height: 32px;
-    margin-bottom: 32px;
-    padding: 0 62.5px;
+    width: 100%;
+    margin: 0 auto 24px;
+
+    :deep(.van-pagination) {
+      justify-content: center;
+      gap: 12px;
+    }
+
     :deep(.van-pagination__item) {
       width: 85px;
       height: 32px;
@@ -177,58 +231,79 @@
       font-family: Rubik;
       font-size: 12px;
     }
+
     :deep(.van-pagination__item--disabled) {
       background: #3e444a;
       color: #979197;
     }
+
     :deep(.van-pagination__item--border:first-child:after) {
       border-width: 0;
     }
+
     :deep(.van-hairline--surround:after) {
       border-width: 0;
     }
+
     :deep(.van-pagination__page-desc) {
       height: 32px;
       color: #979197;
       font-size: 12px;
     }
   }
+
+  .l-title,
+  .l-input,
+  .l-info,
+  .l-btn,
+  .l-cards,
+  .l-page {
+    width: min(100%, 560px);
+  }
+
+  .l-title,
+  .l-input,
+  .l-info,
+  .l-btn {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
   .l-title {
-    width: 328px;
-    height: 20px;
-    margin-top: 9px;
+    min-height: 20px;
+    margin-top: 4px;
+    margin-bottom: 12px;
     font-family: Manrope;
-    font-size: 14px;
+    font-size: 15px;
     font-weight: 500;
     color: #fff;
-    margin-bottom: 12px;
-    padding: 0 23.5px;
   }
+
   .l-input {
-    width: 326px;
-    height: 42px;
-    border-radius: 8px;
+    min-height: 48px;
+    border-radius: 10px;
     box-shadow: 0 20px 60px 0 rgba(55, 62, 125, 0.05);
-    border: solid 1px rgba(0, 0, 0, 0);
+    border: 1px solid rgba(255, 255, 255, 0.04);
     background-color: #2a303c;
-    margin: 0 23.5px;
+    padding: 0 10px 0 12px;
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    gap: 12px;
+
     .input {
-      width: 269.5px;
-      height: 42px;
-      :deep(.van-cell) {
-        background-color: transparent;
-        .van-field__control {
-          color: #fff;
-        }
-      }
+      flex: 1;
+      min-width: 0;
+      min-height: 48px;
+      display: flex;
+      align-items: center;
     }
+
     .btn {
-      width: 48px;
-      height: 24px;
-      border-radius: 4px;
+      flex: 0 0 auto;
+      min-width: 56px;
+      height: 30px;
+      padding: 0 12px;
+      border-radius: 6px;
       border: solid 1px #e89c3a;
       background-color: rgba(0, 0, 0, 0);
       font-family: PingFangSC;
@@ -238,44 +313,61 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      margin-right: 8.5px;
     }
+
     :deep(.van-cell) {
+      width: 100%;
+      padding: 0;
       background-color: transparent;
+
       .van-field__control {
         color: #fff;
+        min-height: 48px;
+      }
+
+      .van-field__placeholder {
+        color: #8e9bae;
       }
     }
   }
+
   .l-info {
-    width: 328px;
-    height: 20px;
-    margin: 0 23.7px 0 23.5px;
+    min-height: 44px;
+    padding: 12px 14px;
+    border-radius: 10px;
+    background: #232a31;
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     justify-content: space-between;
+    gap: 16px;
+
     .left {
-      height: 17px;
-      line-height: 17px;
+      flex: 1;
+      min-width: 0;
       font-family: Manrope;
       font-size: 12px;
+      line-height: 1.5;
       font-weight: 500;
       color: #8e9bae;
     }
+
     .right {
-      height: 20px;
-      line-height: 20px;
+      flex: 0 0 auto;
+      max-width: 45%;
       font-family: Manrope;
       font-size: 14px;
+      line-height: 1.4;
       color: #fff;
+      text-align: right;
+      word-break: break-all;
     }
   }
+
   .l-btn {
-    width: 328px;
-    height: 44px;
-    border-radius: 8px;
+    min-height: 44px;
+    padding: 0 16px;
+    border-radius: 10px;
     background-color: #e89c3a;
-    margin: 0 23.5px;
     font-family: Rubik;
     font-size: 16px;
     font-weight: bold;
@@ -284,20 +376,45 @@
     align-items: center;
     justify-content: center;
   }
+
   .mb28 {
-    margin-bottom: 15px;
+    margin-bottom: 20px;
   }
+
   .mb16 {
     margin-bottom: 16px;
   }
+
   .mb10 {
     margin-bottom: 10px;
   }
+
   .pb20 {
     padding-bottom: 20px;
     border-bottom: 1px solid #2a3138;
   }
 }
+
 :deep(.van-hairline--bottom:after) {
   border-width: 0;
+}
+
+@media (max-width: 420px) {
+  .liquidity {
+    padding-left: 12px;
+    padding-right: 12px;
+
+    .l-info {
+      gap: 12px;
+
+      .right {
+        max-width: 50%;
+        font-size: 13px;
+      }
+    }
+
+    .l-input {
+      padding-right: 8px;
+    }
+  }
 }

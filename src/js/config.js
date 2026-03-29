@@ -19,7 +19,8 @@ const addresses = {
     labubu: "0xb3AacB2b8372693602e785393bB4bF98b47fA69E",
     lp: '0x905bD34D98419542fb14ada7d6327e48ef37D88A',
     manage: '0xc79Aff115A7B3fa0d04C8787f8f379Fcc3C71a24',
-    recoupment: '0xf7Bb57AF57C84Bb27ce83bF661c9345d247701A9'
+    recoupment: '0xf7Bb57AF57C84Bb27ce83bF661c9345d247701A9',
+    swapFeeDividend: '0x4e4857b2Cf6bB4786dfc097bB0933b7E41FA883B'
   },
 }
 
