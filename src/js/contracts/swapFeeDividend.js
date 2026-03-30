@@ -80,7 +80,7 @@ export function swapFeeDividendFuncDecode(func, result) {
   let res = imp.decodeFunctionResult(func, result);
   if (func === 'pendingReward') {
     const value = res.pendingReward ?? res[0];
-    return new BigNumber(value.toString()).dividedBy(1e18).toFixed(8, 1);
+    return new BigNumber(value.toString()).dividedBy(1e18).toFixed(1, 1);
   }
   if (func === 'userInfo') {
     const shareValue = res.share ?? res[0];
