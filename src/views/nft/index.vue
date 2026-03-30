@@ -7,11 +7,13 @@ import {getNFTImage} from "@/js/config";
 import {useLabubuNFTStore} from "@/stores/labubuNFT";
 import {getSelectedAddress} from "@/js/web3";
 import {replaceMiddleWithAsterisks, toFixed} from "@/js/utils";
-import {claim} from "@/js/contracts/labubuNFT";
+import {claim as claimLabubuNFT} from "@/js/contracts/labubuNFT";
+import {claim as claimFeeDividend} from "@/js/contracts/swapFeeDividend";
 
+const STATE_CALL_IDS = [0, 1, 2, 3, 4, 5, 6];
 const store = useLabubuNFTStore();
 onMounted(async () => {
-  await store.setState([0, 1, 2, 3, 4]);
+  await store.setState(STATE_CALL_IDS);
 })
 
 // NFT合集列表
@@ -30,22 +32,40 @@ const nftList = ref([
 
 // 状态
 const claiming = ref(false);
+const feeClaiming = ref(false);
 
 // 获取收益
 const claimEarnings = async () => {
   claiming.value = true;
 
   try {
-    await claim();
+    await claimLabubuNFT();
     await showDialog({
       title: '收益领取成功',
       confirmButtonText: '确定',
       allowHtml: true
     });
+    await store.setState(STATE_CALL_IDS);
   } catch (error) {
     console.log(error);
   }
   claiming.value = false;
+};
+
+const claimFeeDividendEarnings = async () => {
+  feeClaiming.value = true;
+  try {
+    await claimFeeDividend();
+    await showDialog({
+      title: '手续费分红提取成功',
+      confirmButtonText: '确定',
+      allowHtml: true
+    });
+    await store.setState(STATE_CALL_IDS);
+  } catch (error) {
+    console.log(error);
+  }
+  feeClaiming.value = false;
 };
 
 
@@ -115,6 +135,28 @@ const claimEarnings = async () => {
               block
               @click="claimEarnings"
               :loading="claiming"
+            >
+              获取收益
+            </van-button>
+          </section>
+
+          <section class="nft-info-card">
+            <div class="info-title">手续费分红</div>
+            <div class="info-grid">
+              <div class="info-item">
+                <div class="info-label">分红权重</div>
+                <div class="info-value pending">{{ store.swapFeeDividend.share }}</div>
+              </div>
+              <div class="info-item">
+                <div class="info-label">待获取分红</div>
+                <div class="info-value received">{{ store.swapFeeDividend.pendingReward }}</div>
+              </div>
+            </div>
+            <van-button
+                class="earnings-btn"
+                block
+                @click="claimFeeDividendEarnings"
+                :loading="feeClaiming"
             >
               获取收益
             </van-button>

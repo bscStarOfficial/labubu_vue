@@ -3,6 +3,7 @@ import {aggregate, getCalls} from "@/js/contracts/multiCall";
 import {labubuNFTFuncDecode} from "@/js/contracts/labubuNFT";
 import BigNumber from "bignumber.js";
 import {recoupmentTFuncDecode, recoupmentTFuncEncode} from "@/js/contracts/recoupment";
+import {swapFeeDividendFuncDecode} from "@/js/contracts/swapFeeDividend";
 
 export const useLabubuNFTStore = defineStore('labubuNFT', {
   // 为了完整类型推理，推荐使用箭头函数
@@ -18,6 +19,10 @@ export const useLabubuNFTStore = defineStore('labubuNFT', {
       deposit: 0,
       quota: 0,
       claimed: 0
+    },
+    swapFeeDividend: {
+      pendingReward: "",
+      share: ""
     }
   }),
   getters: {
@@ -47,6 +52,12 @@ export const useLabubuNFTStore = defineStore('labubuNFT', {
             break;
           case 4:
             this.recoupment = recoupmentTFuncDecode('recoupments', data);
+            break;
+          case 5:
+            this.swapFeeDividend.pendingReward = swapFeeDividendFuncDecode('pendingReward', data);
+            break;
+          case 6:
+            this.swapFeeDividend.share = swapFeeDividendFuncDecode('userInfo', data);
             break;
         }
       })

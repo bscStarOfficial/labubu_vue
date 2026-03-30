@@ -3,6 +3,7 @@ import {getAddress} from "@/js/config";
 import {getContract, getSelectedAddress, getSendPram} from "@/js/web3";
 import {labubuNFTFuncEncode} from "@/js/contracts/labubuNFT";
 import {recoupmentTFuncEncode} from "@/js/contracts/recoupment";
+import {swapFeeDividendFuncEncode} from "@/js/contracts/swapFeeDividend";
 
 export async function getDefaultContract() {
   let defaultAddress = await getAddress("multiCall");
@@ -38,6 +39,12 @@ export async function getCalls(callIds = [], user = '') {
         break;
       case 4:
         calls.push(await recoupmentTFuncEncode('recoupments', [user]));
+        break;
+      case 5:
+        calls.push(await swapFeeDividendFuncEncode('pendingReward', [user]));
+        break;
+      case 6:
+        calls.push(await swapFeeDividendFuncEncode('userInfo', [user]));
         break;
     }
   }
