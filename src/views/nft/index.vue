@@ -140,7 +140,9 @@ const claimFeeDividendEarnings = async () => {
             </van-button>
           </section>
 
-          <section class="nft-info-card">
+          <section
+              v-if="Number(store.swapFeeDividend.share) > 0 || Number(store.swapFeeDividend.pendingReward) > 0"
+              class="nft-info-card">
             <div class="info-title">手续费分红</div>
             <div class="info-grid">
               <div class="info-item">
