@@ -22,7 +22,8 @@ export const useLabubuNFTStore = defineStore('labubuNFT', {
     },
     swapFeeDividend: {
       pendingReward: "",
-      share: ""
+      share: "",
+      claimed: "",
     }
   }),
   getters: {
@@ -58,6 +59,9 @@ export const useLabubuNFTStore = defineStore('labubuNFT', {
             break;
           case 6:
             this.swapFeeDividend.share = swapFeeDividendFuncDecode('userInfo', data);
+            break;
+          case 7:
+            this.swapFeeDividend.claimed = swapFeeDividendFuncDecode('userClaimed', data);
             break;
         }
       })

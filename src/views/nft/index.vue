@@ -146,8 +146,8 @@ const claimFeeDividendEarnings = async () => {
             <div class="info-title">手续费分红</div>
             <div class="info-grid">
               <div class="info-item">
-                <div class="info-label">分红权重</div>
-                <div class="info-value pending">{{ store.swapFeeDividend.share }}</div>
+                <div class="info-label">已领取分红</div>
+                <div class="info-value pending">{{ store.swapFeeDividend.claimed }}</div>
               </div>
               <div class="info-item">
                 <div class="info-label">待获取分红</div>

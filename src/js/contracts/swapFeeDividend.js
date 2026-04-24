@@ -82,6 +82,10 @@ export function swapFeeDividendFuncDecode(func, result) {
     const value = res.pendingReward ?? res[0];
     return new BigNumber(value.toString()).dividedBy(1e18).toFixed(1, 1);
   }
+  if (func === 'userClaimed') {
+    const value = res.userClaimed ?? res[0];
+    return new BigNumber(value.toString()).dividedBy(1e18).toFixed(1, 1);
+  }
   if (func === 'userInfo') {
     const shareValue = res.share ?? res[0];
     return new BigNumber(shareValue.toString()).toFixed(0);

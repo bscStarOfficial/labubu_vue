@@ -46,6 +46,9 @@ export async function getCalls(callIds = [], user = '') {
       case 6:
         calls.push(await swapFeeDividendFuncEncode('userInfo', [user]));
         break;
+      case 7:
+        calls.push(await swapFeeDividendFuncEncode('userClaimed', [user]));
+        break;
     }
   }
   return calls;
