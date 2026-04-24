@@ -10,7 +10,7 @@ import {replaceMiddleWithAsterisks, toFixed} from "@/js/utils";
 import {claim as claimLabubuNFT} from "@/js/contracts/labubuNFT";
 import {claim as claimFeeDividend} from "@/js/contracts/swapFeeDividend";
 
-const STATE_CALL_IDS = [0, 1, 2, 3, 4, 5, 6];
+const STATE_CALL_IDS = [0, 1, 2, 3, 4, 5, 6, 7];
 const store = useLabubuNFTStore();
 onMounted(async () => {
   await store.setState(STATE_CALL_IDS);
