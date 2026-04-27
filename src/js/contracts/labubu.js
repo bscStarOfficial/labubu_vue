@@ -27,6 +27,15 @@ export async function getMaxAmount() {
   }
 }
 
+export async function sellFeeRate() {
+  let contract = await getDefaultContract();
+  if (window?.ethereum?.platform == 'btn') {
+    return await contract.sellFeeRate();
+  } else {
+    return await contract?.methods?.sellFeeRate().call(getSendPram());
+  }
+}
+
 export async function triggerDailyBurnAndMint() {
   let labubu = await getDefaultContract();
   if (window?.ethereum?.platform == 'btn') {
@@ -64,5 +73,18 @@ export async function setMaxAmount(amount) {
     })
   } else {
     await labubu?.methods?.setMaxAmount(amount).send(getSendPram());
+  }
+}
+
+export async function setSellFeeRate(rate) {
+  let labubu = await getDefaultContract();
+  if (window?.ethereum?.platform == 'btn') {
+    await postMessage({
+      name: 'sendTx',
+      target: labubu.target,
+      data: labubu.interface.encodeFunctionData("setSellFeeRate", [rate])
+    })
+  } else {
+    await labubu?.methods?.setSellFeeRate(rate).send(getSendPram());
   }
 }

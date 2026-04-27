@@ -1,56 +1,19 @@
 export default [
   {
-    "anonymous": false,
     "inputs": [
       {
-        "indexed": false,
         "internalType": "address",
-        "name": "previousAdmin",
+        "name": "_wBNB",
         "type": "address"
       },
       {
-        "indexed": false,
         "internalType": "address",
-        "name": "newAdmin",
+        "name": "_router",
         "type": "address"
       }
     ],
-    "name": "AdminChanged",
-    "type": "event"
-  },
-  {
-    "anonymous": false,
-    "inputs": [
-      {
-        "indexed": true,
-        "internalType": "address",
-        "name": "beacon",
-        "type": "address"
-      }
-    ],
-    "name": "BeaconUpgraded",
-    "type": "event"
-  },
-  {
-    "anonymous": false,
-    "inputs": [
-      {
-        "indexed": true,
-        "internalType": "address",
-        "name": "implementation",
-        "type": "address"
-      }
-    ],
-    "name": "Upgraded",
-    "type": "event"
-  },
-  {
-    "stateMutability": "payable",
-    "type": "fallback"
-  },
-  {
-    "stateMutability": "payable",
-    "type": "receive"
+    "stateMutability": "nonpayable",
+    "type": "constructor"
   },
   {
     "inputs": [],
@@ -390,6 +353,19 @@ export default [
     "anonymous": false,
     "inputs": [
       {
+        "indexed": false,
+        "internalType": "uint16",
+        "name": "rate",
+        "type": "uint16"
+      }
+    ],
+    "name": "SellFeeRateUpdated",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
         "indexed": true,
         "internalType": "address",
         "name": "from",
@@ -434,6 +410,19 @@ export default [
       }
     ],
     "name": "TriggerDailyBurnAndMint",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "implementation",
+        "type": "address"
+      }
+    ],
+    "name": "Upgraded",
     "type": "event"
   },
   {
@@ -1246,6 +1235,19 @@ export default [
     "type": "function"
   },
   {
+    "inputs": [],
+    "name": "sellFeeRate",
+    "outputs": [
+      {
+        "internalType": "uint16",
+        "name": "",
+        "type": "uint16"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
     "inputs": [
       {
         "internalType": "bool",
@@ -1358,6 +1360,19 @@ export default [
       }
     ],
     "name": "setRemoveLpSwitch",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint16",
+        "name": "_rate",
+        "type": "uint16"
+      }
+    ],
+    "name": "setSellFeeRate",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
@@ -1540,19 +1555,7 @@ export default [
     "type": "function"
   },
   {
-    "inputs": [
-      {
-        "internalType": "address",
-        "name": "_logic",
-        "type": "address"
-      },
-      {
-        "internalType": "bytes",
-        "name": "_data",
-        "type": "bytes"
-      }
-    ],
     "stateMutability": "payable",
-    "type": "constructor"
+    "type": "receive"
   }
 ]
