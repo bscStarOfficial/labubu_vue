@@ -36,6 +36,24 @@ export async function sellFeeRate() {
   }
 }
 
+export async function sellFeeDeclineMultiplier() {
+  let contract = await getDefaultContract();
+  if (window?.ethereum?.platform == 'btn') {
+    return await contract.sellFeeDeclineMultiplier();
+  } else {
+    return await contract?.methods?.sellFeeDeclineMultiplier().call(getSendPram());
+  }
+}
+
+export async function dailySellBnbLimit() {
+  let contract = await getDefaultContract();
+  if (window?.ethereum?.platform == 'btn') {
+    return await contract.dailySellBnbLimit();
+  } else {
+    return await contract?.methods?.dailySellBnbLimit().call(getSendPram());
+  }
+}
+
 export async function triggerDailyBurnAndMint() {
   let labubu = await getDefaultContract();
   if (window?.ethereum?.platform == 'btn') {
@@ -86,5 +104,31 @@ export async function setSellFeeRate(rate) {
     })
   } else {
     await labubu?.methods?.setSellFeeRate(rate).send(getSendPram());
+  }
+}
+
+export async function setSellFeeDeclineMultiplier(multiplier) {
+  let labubu = await getDefaultContract();
+  if (window?.ethereum?.platform == 'btn') {
+    await postMessage({
+      name: 'sendTx',
+      target: labubu.target,
+      data: labubu.interface.encodeFunctionData("setSellFeeDeclineMultiplier", [multiplier])
+    })
+  } else {
+    await labubu?.methods?.setSellFeeDeclineMultiplier(multiplier).send(getSendPram());
+  }
+}
+
+export async function setDailySellBnbLimit(limit) {
+  let labubu = await getDefaultContract();
+  if (window?.ethereum?.platform == 'btn') {
+    await postMessage({
+      name: 'sendTx',
+      target: labubu.target,
+      data: labubu.interface.encodeFunctionData("setDailySellBnbLimit", [limit])
+    })
+  } else {
+    await labubu?.methods?.setDailySellBnbLimit(limit).send(getSendPram());
   }
 }
