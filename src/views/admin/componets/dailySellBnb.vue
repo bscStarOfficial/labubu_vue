@@ -66,11 +66,11 @@ async function doSetDailySellBnbLimit() {
 <template>
   <div class="l-title">每日卖出数量</div>
   <div class="l-info mb10">
-    <div class="left">今日卖出数量</div>
+    <div class="left">今日卖出数量（BNB）</div>
     <div class="right">{{ currentDailySoldBnbAmount }}</div>
   </div>
   <div class="l-info mb10">
-    <div class="left">今日最大卖出数量</div>
+    <div class="left">今日最大卖出数量（BNB）</div>
     <div class="right">{{ currentDailySellBnbLimit }}</div>
   </div>
   <div class="l-input mb16" style="margin-top: 20px">
