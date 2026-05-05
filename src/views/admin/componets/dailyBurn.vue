@@ -54,7 +54,7 @@ async function doSetDailBurnRate() {
     <van-field v-model="dailyBurnRatesSet[1]" placeholder="输入项目方比例(0.5%输入50)"/>
   </div>
   <div class="l-input mb16" style="margin-top: 20px">
-    <van-field v-model="dailyBurnRatesSet[2]" placeholder="输入Lp分红比例(3个比例加一起必须等于200)"/>
+    <van-field v-model="dailyBurnRatesSet[2]" placeholder="输入Lp分红比例(3个比例加一起必须小于等于300)"/>
   </div>
   <div v-if="loading[0]" class="l-btn">
     <van-loading size="22" type="circular" color="#FFF"/>
