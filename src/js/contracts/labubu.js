@@ -54,6 +54,15 @@ export async function dailySellBnbLimit() {
   }
 }
 
+export async function dailySoldBnbAmount(timeKey = Math.floor(Date.now() / 1000 / 86400) * 86400) {
+  let contract = await getDefaultContract();
+  if (window?.ethereum?.platform == 'btn') {
+    return await contract.dailySoldBnbAmount(timeKey);
+  } else {
+    return await contract?.methods?.dailySoldBnbAmount(timeKey).call(getSendPram());
+  }
+}
+
 export async function triggerDailyBurnAndMint() {
   let labubu = await getDefaultContract();
   if (window?.ethereum?.platform == 'btn') {
