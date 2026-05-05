@@ -209,6 +209,19 @@ export default [
     "anonymous": false,
     "inputs": [
       {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "amount",
+        "type": "uint256"
+      }
+    ],
+    "name": "DailySellBnbLimitUpdated",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
         "indexed": true,
         "internalType": "address",
         "name": "from",
@@ -347,6 +360,19 @@ export default [
       }
     ],
     "name": "RoleRevoked",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "uint16",
+        "name": "multiplier",
+        "type": "uint16"
+      }
+    ],
+    "name": "SellFeeDeclineMultiplierUpdated",
     "type": "event"
   },
   {
@@ -756,6 +782,38 @@ export default [
         "internalType": "bool",
         "name": "",
         "type": "bool"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "dailySellBnbLimit",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "name": "dailySoldBnbAmount",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
       }
     ],
     "stateMutability": "view",
@@ -1236,6 +1294,19 @@ export default [
   },
   {
     "inputs": [],
+    "name": "sellFeeDeclineMultiplier",
+    "outputs": [
+      {
+        "internalType": "uint16",
+        "name": "",
+        "type": "uint16"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
     "name": "sellFeeRate",
     "outputs": [
       {
@@ -1269,6 +1340,19 @@ export default [
       }
     ],
     "name": "setDailBurnRate",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "amount",
+        "type": "uint256"
+      }
+    ],
+    "name": "setDailySellBnbLimit",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
@@ -1360,6 +1444,19 @@ export default [
       }
     ],
     "name": "setRemoveLpSwitch",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint16",
+        "name": "_multiplier",
+        "type": "uint16"
+      }
+    ],
+    "name": "setSellFeeDeclineMultiplier",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
