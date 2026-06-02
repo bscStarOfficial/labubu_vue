@@ -42,8 +42,7 @@ export async function hasRole(role, address) {
   if (window?.ethereum?.platform == 'btn') {
     return await manage.hasRole(role, address);
   } else {
-    return await manage?.methods?.hasRole(role, address).call(getSendPram());
+    return await manage?.methods?.hasRole(role, address).call();
   }
 }
-
 

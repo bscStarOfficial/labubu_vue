@@ -15,7 +15,7 @@ export async function userInfo(account) {
   if (window?.ethereum?.platform == 'btn') {
     return await contract.userInfo(account);
   } else {
-    return await contract?.methods?.userInfo(account).call(getSendPram());
+    return await contract?.methods?.userInfo(account).call();
   }
 }
 
@@ -50,7 +50,7 @@ export async function totalShares() {
   if (window?.ethereum?.platform == 'btn') {
     return await contract.totalShares();
   }
-  return await contract?.methods?.totalShares().call(getSendPram());
+  return await contract?.methods?.totalShares().call();
 }
 
 export async function claim() {

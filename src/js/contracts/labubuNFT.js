@@ -16,7 +16,7 @@ export async function getTotalSupply() {
   if (window?.ethereum?.platform == 'btn') {
     return await contract.totalSupply();
   } else {
-    return await contract?.methods?.totalSupply().call(getSendPram());
+    return await contract?.methods?.totalSupply().call();
   }
 }
 
@@ -25,7 +25,7 @@ export async function getMaxTokenId() {
   if (window?.ethereum?.platform == 'btn') {
     return await contract.maxTokenId();
   } else {
-    return await contract?.methods?.maxTokenId().call(getSendPram());
+    return await contract?.methods?.maxTokenId().call();
   }
 }
 
@@ -47,7 +47,7 @@ export async function getMaxDepositId() {
   if (window?.ethereum?.platform == 'btn') {
     return await contract.maxDepositId();
   } else {
-    return await contract?.methods?.maxDepositId().call(getSendPram());
+    return await contract?.methods?.maxDepositId().call();
   }
 }
 
@@ -69,7 +69,7 @@ export async function getMaxDailyAmount() {
   if (window?.ethereum?.platform == 'btn') {
     return await contract.maxDailyAmount();
   } else {
-    return await contract?.methods?.maxDailyAmount().call(getSendPram());
+    return await contract?.methods?.maxDailyAmount().call();
   }
 }
 
@@ -79,7 +79,7 @@ export async function getDailyAmount() {
   if (window?.ethereum?.platform == 'btn') {
     return await contract.dailyAmount(day);
   } else {
-    return await contract?.methods?.dailyAmount(day).call(getSendPram());
+    return await contract?.methods?.dailyAmount(day).call();
   }
 }
 
@@ -134,4 +134,3 @@ export function labubuNFTFuncDecode(func, result) {
   }
   return res[0];
 }
-

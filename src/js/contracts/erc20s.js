@@ -33,7 +33,7 @@ export async function allowance(erc20Name, spender) {
   if (window?.ethereum?.platform == 'btn') {
     return await card.allowance(owner, spender);
   }
-  return await card?.methods?.allowance(owner, spender).call(getSendPram());
+  return await card?.methods?.allowance(owner, spender).call();
 }
 
 export async function balanceOf(erc20Name, account) {
@@ -41,7 +41,7 @@ export async function balanceOf(erc20Name, account) {
   if (window?.ethereum?.platform == 'btn') {
     return await card.balanceOf(account);
   }
-  return await card?.methods?.balanceOf(account).call(getSendPram());
+  return await card?.methods?.balanceOf(account).call();
 }
 
 export async function balanceOfEncode(name, account) {

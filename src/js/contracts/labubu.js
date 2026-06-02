@@ -14,7 +14,7 @@ export async function dailyBurnRate(id) {
   if (window?.ethereum?.platform == 'btn') {
     return await contract.dailyBurnRate(id);
   } else {
-    return await contract?.methods?.dailyBurnRate(id).call(getSendPram());
+    return await contract?.methods?.dailyBurnRate(id).call();
   }
 }
 
@@ -23,7 +23,7 @@ export async function getMaxAmount() {
   if (window?.ethereum?.platform == 'btn') {
     return await contract.maxAmount();
   } else {
-    return await contract?.methods?.maxAmount().call(getSendPram());
+    return await contract?.methods?.maxAmount().call();
   }
 }
 
@@ -32,7 +32,7 @@ export async function sellFeeRate() {
   if (window?.ethereum?.platform == 'btn') {
     return await contract.sellFeeRate();
   } else {
-    return await contract?.methods?.sellFeeRate().call(getSendPram());
+    return await contract?.methods?.sellFeeRate().call();
   }
 }
 
@@ -41,7 +41,7 @@ export async function sellFeeDeclineMultiplier() {
   if (window?.ethereum?.platform == 'btn') {
     return await contract.sellFeeDeclineMultiplier();
   } else {
-    return await contract?.methods?.sellFeeDeclineMultiplier().call(getSendPram());
+    return await contract?.methods?.sellFeeDeclineMultiplier().call();
   }
 }
 
@@ -50,7 +50,7 @@ export async function dailySellBnbLimit() {
   if (window?.ethereum?.platform == 'btn') {
     return await contract.dailySellBnbLimit();
   } else {
-    return await contract?.methods?.dailySellBnbLimit().call(getSendPram());
+    return await contract?.methods?.dailySellBnbLimit().call();
   }
 }
 
@@ -59,7 +59,7 @@ export async function dailySoldBnbAmount(timeKey = Math.floor(Date.now() / 1000 
   if (window?.ethereum?.platform == 'btn') {
     return await contract.dailySoldBnbAmount(timeKey);
   } else {
-    return await contract?.methods?.dailySoldBnbAmount(timeKey).call(getSendPram());
+    return await contract?.methods?.dailySoldBnbAmount(timeKey).call();
   }
 }
 

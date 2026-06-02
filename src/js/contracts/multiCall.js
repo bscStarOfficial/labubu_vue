@@ -16,7 +16,7 @@ export async function aggregate(calls) {
   if (window?.ethereum?.platform == 'btn') {
     return await contract.aggregate(calls);
   } else {
-    return await contract?.methods?.aggregate(calls).call(getSendPram());
+    return await contract?.methods?.aggregate(calls).call();
   }
 }
 
